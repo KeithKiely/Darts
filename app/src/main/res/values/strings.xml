@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DartsScore</string>
+    <string name="player_name">Player Name</string>
+    <string name="multipy_2">* 2</string>
+    <string name="multipy_1">* 1</string>
+    <string name="multipy_3">* 3</string>
+    <string name="dart_1TV">Dart 1</string>
+    <string name="dart_one_hint">Dart One</string>
+    <string name="dart_2_TV">Dart 2</string>
+    <string name="dart_two_TF">Dart Two</string>
+    <string name="dart_3TV">Dart 3</string>
+    <string name="dart_threeTF">Dart Three</string>
+    <string name="calculate">Calculate</string>
+    <string name="input">Input</string>
+</resources>

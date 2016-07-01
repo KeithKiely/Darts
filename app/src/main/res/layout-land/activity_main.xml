@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.xdog.dartsscore.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player_name"
+        android:id="@+id/playerNameTV"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="26sp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dart_1TV"
+                android:id="@+id/dart1TV"
+                android:textSize="24sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="29dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/dartOneTF"
+                android:hint="@string/input"
+                android:layout_below="@+id/dart1TV"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/playerNameTV" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignTop="@+id/dartOneTF"
+                android:id="@+id/radioGroup1"
+                android:layout_alignRight="@+id/done"
+                android:layout_alignEnd="@+id/done">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_1"
+                    android:id="@+id/dart1_radio1"
+                    android:checked="true"
+                    android:layout_marginRight="8sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_2"
+                    android:id="@+id/dart1_radio2"
+                    android:checked="false"
+                    android:layout_marginRight="8sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_3"
+                    android:id="@+id/dart1_radio3"
+                    android:checked="false"
+                    android:layout_marginRight="8sp"
+                    android:layout_gravity="right" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dart_2_TV"
+                android:id="@+id/dart2TV"
+                android:textSize="24sp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/dartOneTF"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/dartTwoTF"
+                android:layout_alignParentStart="true"
+                android:hint="@string/input"
+                android:layout_below="@+id/dart2TV"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/playerNameTV"
+                android:layout_toStartOf="@+id/playerNameTV" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/dart2TV"
+                android:layout_alignLeft="@+id/radioGroup1"
+                android:layout_alignStart="@+id/radioGroup1"
+                android:id="@+id/radioGroup2">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_1"
+                    android:id="@+id/dart2_radio1"
+                    android:checked="true"
+                    android:layout_marginRight="8sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_2"
+                    android:id="@+id/dart2_radio2"
+                    android:checked="false"
+                    android:layout_marginRight="8sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_3"
+                    android:id="@+id/dart2_radio3"
+                    android:checked="false"
+                    android:layout_marginRight="8sp" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dart_3TV"
+                android:id="@+id/dart3TV"
+                android:textSize="24sp"
+                android:layout_marginTop="31dp"
+                android:layout_below="@+id/dartTwoTF"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/dartThreeTF"
+                android:layout_alignParentStart="true"
+                android:hint="@string/input"
+                android:layout_below="@+id/dart3TV"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/playerNameTV"
+                android:layout_toStartOf="@+id/playerNameTV" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_above="@+id/done"
+                android:layout_alignLeft="@+id/radioGroup2"
+                android:layout_alignStart="@+id/radioGroup2"
+                android:id="@+id/radioGroup3">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_1"
+                    android:id="@+id/dart3_radio1"
+                    android:checked="true"
+                    android:layout_marginRight="8sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_2"
+                    android:id="@+id/dart3_radio2"
+                    android:checked="false"
+                    android:layout_marginRight="8sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multipy_3"
+                    android:id="@+id/dart3_radio3"
+                    android:checked="false"
+                    android:layout_marginRight="8sp" />
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calculate"
+                android:id="@+id/done"
+                android:layout_below="@+id/dartThreeTF"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="done" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
