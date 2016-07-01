@@ -34,42 +34,60 @@ public class MainActivity extends AppCompatActivity {
      */
     public void calculateScrore() {
 
-        int dartOne;
+        int dartOne = 0;
         int dartThree = 0;
         int dartTwo = 0;
 
         int selectedButtonG1 = group1.getCheckedRadioButtonId();
         if(selectedButtonG1 == 2131492949) {
-            dartOne = Integer.parseInt(dart1.getText().toString());
+            if(validScore(Integer.parseInt(dart1.getText().toString()))) {
+                dartOne = Integer.parseInt(dart1.getText().toString());
+            }
         } else if (selectedButtonG1 == 2131492950) {
-             dartOne = (Integer.parseInt(dart1.getText().toString())) * 2;
+            if(validScore(Integer.parseInt(dart1.getText().toString()))) {
+                dartOne = Integer.parseInt(dart1.getText().toString()) *2;
+            }
         } else {
-            dartOne = (Integer.parseInt(dart1.getText().toString())) * 3;
+            if(validScore(Integer.parseInt(dart1.getText().toString()))) {
+                dartOne = Integer.parseInt(dart1.getText().toString()) * 3;
+            }
         }
 
         switch (group2.getCheckedRadioButtonId()) {
             case R.id.dart2_radio1:
-                dartTwo = Integer.parseInt(dart2.getText().toString());
+                if(validScore(Integer.parseInt(dart2.getText().toString()))) {
+                    dartTwo = Integer.parseInt(dart2.getText().toString());
+                }
                 break;
             case R.id.dart2_radio2:
-                dartTwo = Integer.parseInt(dart2.getText().toString()) * 2;
+                if(validScore(Integer.parseInt(dart2.getText().toString()))) {
+                    dartTwo = Integer.parseInt(dart2.getText().toString()) * 2;
+                }
                 break;
             case R.id.dart2_radio3:
-                dartTwo = Integer.parseInt(dart2.getText().toString()) * 3;
+                if(validScore(Integer.parseInt(dart2.getText().toString()))) {
+                    dartTwo = Integer.parseInt(dart2.getText().toString()) * 3;
+                }
                 break;
         }
         switch (group3.getCheckedRadioButtonId()) {
             case R.id.dart3_radio1:
-                dartThree = Integer.parseInt(dart3.getText().toString());
+                if(validScore(Integer.parseInt(dart3.getText().toString()))) {
+                    dartThree = Integer.parseInt(dart3.getText().toString());
+                }
                 break;
             case R.id.dart3_radio2:
-                dartThree = Integer.parseInt(dart3.getText().toString()) * 2;
+                if(validScore(Integer.parseInt(dart3.getText().toString()))) {
+                    dartThree = Integer.parseInt(dart3.getText().toString()) *2;
+                }
                 break;
             case R.id.dart3_radio3:
-                dartThree = Integer.parseInt(dart3.getText().toString()) * 3;
+                if(validScore(Integer.parseInt(dart3.getText().toString()))) {
+                    dartThree = Integer.parseInt(dart3.getText().toString()) * 3;
+                }
                 break;
         }
-        if (validScore(dartOne, dartTwo, dartThree)) {
+        if (validScore(dartOne)) {
             int total = dartOne + dartTwo + dartThree;
             Log.i("Score: " , " " + total);
         }
@@ -81,11 +99,9 @@ public class MainActivity extends AppCompatActivity {
      * @param dart1, dart2, dart3; int
      * @return true; boolean
      */
-    public boolean validScore(int dart1, int dart2, int dart3) {
+    public boolean validScore(int dart1) {
         boolean temp = false;
-        if ((dart1 >= 0 && dart1 <= 20 || dart1 == 25 || dart1 == 50 ) &&
-        (dart2 >= 0 && dart2 <= 20 || dart2 == 25 || dart2 == 50) &&
-        (dart3 >= 0 && dart3 <= 20 || dart3 == 25 || dart3 == 50)) {
+        if ((dart1 >= 0 && dart1 <= 20 || dart1 == 25 || dart1 == 50 )) {
             temp = true;
         }
         return temp;
