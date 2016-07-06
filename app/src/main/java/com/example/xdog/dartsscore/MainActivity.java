@@ -33,40 +33,91 @@ public class MainActivity extends AppCompatActivity {
      * @return total, int
      */
     public void calculateScrore() {
-
+        boolean validInput = true;
         int dartOne = 0;
         int dartThree = 0;
         int dartTwo = 0;
 
-        int selectedButtonG1 = group1.getCheckedRadioButtonId();
-        if(selectedButtonG1 == 2131492949) {
-            if(validScore(Integer.parseInt(dart1.getText().toString()))) {
-                dartOne = Integer.parseInt(dart1.getText().toString());
-            }
-        } else if (selectedButtonG1 == 2131492950) {
-            if(validScore(Integer.parseInt(dart1.getText().toString()))) {
-                dartOne = Integer.parseInt(dart1.getText().toString()) *2;
-            }
-        } else {
-            if(validScore(Integer.parseInt(dart1.getText().toString()))) {
-                dartOne = Integer.parseInt(dart1.getText().toString()) * 3;
-            }
+        switch (group1.getCheckedRadioButtonId()) {
+            case R.id.dart1_radio1:
+                if(validScore(Integer.parseInt(dart1.getText().toString()))) {
+                    dartOne = Integer.parseInt(dart1.getText().toString());
+                } else {
+                    validInput = false;
+                }
+                break;
+            case R.id.dart1_radio2:
+                if(validScore(Integer.parseInt(dart1.getText().toString()))) {
+                    int temp = Integer.parseInt(dart1.getText().toString());
+                    if ( temp != 25 && temp != 50) {
+                        dartOne = temp * 2;
+                    }
+                    if (temp == 25) {
+                        dartOne = 25;
+                    }
+                    if (temp == 50) {
+                        dartOne = 50;
+                    }
+                } else {
+                    validInput = false;
+                }
+                break;
+            case R.id.dart1_radio3:
+                if(validScore(Integer.parseInt(dart1.getText().toString()))) {
+                    int temp = Integer.parseInt(dart1.getText().toString());
+                    if (temp != 25 && temp != 50) {
+                        dartOne = temp * 3;
+                    }
+                    if (temp == 25) {
+                        dartOne = 25;
+                    }
+                    if (temp == 50) {
+                        dartOne = 50;
+                    }
+                } else {
+                    validInput = false;
+                }
+                break;
         }
-
         switch (group2.getCheckedRadioButtonId()) {
             case R.id.dart2_radio1:
-                if(validScore(Integer.parseInt(dart2.getText().toString()))) {
+                if (validScore(Integer.parseInt(dart2.getText().toString()))) {
                     dartTwo = Integer.parseInt(dart2.getText().toString());
+                } else {
+                    validInput = false;
                 }
                 break;
             case R.id.dart2_radio2:
-                if(validScore(Integer.parseInt(dart2.getText().toString()))) {
-                    dartTwo = Integer.parseInt(dart2.getText().toString()) * 2;
+                if (validScore(Integer.parseInt(dart2.getText().toString()))) {
+                    int temp = Integer.parseInt(dart2.getText().toString());
+                    if (temp != 25 && temp != 50) {
+                        dartTwo = temp * 2;
+                    }
+                    if (temp == 25) {
+                        dartTwo = 25;
+                    }
+                    if (temp == 50) {
+                        dartTwo = 50;
+                    }
+                } else {
+                    validInput = false;
                 }
                 break;
             case R.id.dart2_radio3:
-                if(validScore(Integer.parseInt(dart2.getText().toString()))) {
-                    dartTwo = Integer.parseInt(dart2.getText().toString()) * 3;
+                if (validScore(Integer.parseInt(dart2.getText().toString()))) {
+                    int temp = Integer.parseInt(dart2.getText().toString());
+                    if (temp != 25 && temp != 50) {
+                        dartTwo = temp * 3;
+                    }
+                    if (temp == 25) {
+                        dartTwo = 25;
+                    }
+                    if (temp == 50) {
+                        dartTwo = 50;
+                    }
+                }
+                else {
+                    validInput = false;
                 }
                 break;
         }
@@ -74,35 +125,63 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart3_radio1:
                 if(validScore(Integer.parseInt(dart3.getText().toString()))) {
                     dartThree = Integer.parseInt(dart3.getText().toString());
+                } else {
+                    validInput = false;
                 }
                 break;
             case R.id.dart3_radio2:
                 if(validScore(Integer.parseInt(dart3.getText().toString()))) {
-                    dartThree = Integer.parseInt(dart3.getText().toString()) *2;
+                    int temp = Integer.parseInt(dart3.getText().toString());
+                    if (temp != 25 && temp != 50) {
+                        dartThree = temp * 2;
+                    }
+                    if (temp == 25) {
+                        dartThree = 25;
+                    }
+                    if (temp == 50) {
+                        dartThree = 50;
+                    }
+                }
+                else {
+                    validInput = false;
                 }
                 break;
             case R.id.dart3_radio3:
                 if(validScore(Integer.parseInt(dart3.getText().toString()))) {
-                    dartThree = Integer.parseInt(dart3.getText().toString()) * 3;
+                    int temp = Integer.parseInt(dart3.getText().toString());
+                    if (temp != 25 && temp != 50) {
+                        dartThree = temp * 3;
+                    }
+                    if (temp == 25) {
+                        dartThree = 25;
+                    }
+                    if (temp == 50) {
+                        dartThree = 50;
+                    }
+                } else {
+                    validInput = false;
                 }
                 break;
         }
-        if (validScore(dartOne)) {
+        if ( validInput) {
             int total = dartOne + dartTwo + dartThree;
             Log.i("Score: " , " " + total);
+        } else {
+            Log.i("Warning", " Invlaid input");
         }
 
     }
 
     /**
      * validScore() - Checks to see if the user has input a valid score
-     * @param dart1, dart2, dart3; int
+     * @param dart int
      * @return true; boolean
      */
-    public boolean validScore(int dart1) {
+    public boolean validScore(int dart) {
         boolean temp = false;
-        if ((dart1 >= 0 && dart1 <= 20 || dart1 == 25 || dart1 == 50 )) {
-            temp = true;
+        Log.i("validScore method"," " +dart);
+        if ((dart >= 0 && dart <= 20 || dart == 25 || dart == 50 )) {
+            return true;
         }
         return temp;
     }
