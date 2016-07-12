@@ -18,8 +18,6 @@ public class Scoreboard extends AppCompatActivity {
     public void openCalc(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivityForResult(intent,1);
-
-
     }
 
     @Override

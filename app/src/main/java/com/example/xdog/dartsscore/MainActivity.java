@@ -14,6 +14,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private EditText dart1, dart2, dart3;
     private RadioGroup group1, group2, group3;
+    private final int bull = 50;
+    private final int _25 = 25;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart1_radio2:
                 if(validScore(Integer.parseInt(dart1.getText().toString()))) {
                     int temp = Integer.parseInt(dart1.getText().toString());
-                    if ( temp != 25 && temp != 50) {
+                    if ( temp != _25 && temp != bull) {
                         dartOne = temp * 2;
                     }
-                    if (temp == 25) {
-                        dartOne = 25;
+                    if (temp == _25) {
+                        dartOne = _25;
                     }
-                    if (temp == 50) {
-                        dartOne = 50;
+                    if (temp == bull) {
+                        dartOne = bull;
                     }
                 } else {
                     validInput = false;
@@ -66,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart1_radio3:
                 if(validScore(Integer.parseInt(dart1.getText().toString()))) {
                     int temp = Integer.parseInt(dart1.getText().toString());
-                    if (temp != 25 && temp != 50) {
+                    if (temp != _25 && temp != bull) {
                         dartOne = temp * 3;
                     }
-                    if (temp == 25) {
-                        dartOne = 25;
+                    if (temp == _25) {
+                        dartOne = _25;
                     }
-                    if (temp == 50) {
-                        dartOne = 50;
+                    if (temp == bull) {
+                        dartOne = bull;
                     }
                 } else {
                     validInput = false;
@@ -91,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart2_radio2:
                 if (validScore(Integer.parseInt(dart2.getText().toString()))) {
                     int temp = Integer.parseInt(dart2.getText().toString());
-                    if (temp != 25 && temp != 50) {
+                    if (temp != _25 && temp != bull) {
                         dartTwo = temp * 2;
                     }
-                    if (temp == 25) {
-                        dartTwo = 25;
+                    if (temp == _25) {
+                        dartTwo = _25;
                     }
-                    if (temp == 50) {
-                        dartTwo = 50;
+                    if (temp == bull) {
+                        dartTwo = bull;
                     }
                 } else {
                     validInput = false;
@@ -107,14 +109,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart2_radio3:
                 if (validScore(Integer.parseInt(dart2.getText().toString()))) {
                     int temp = Integer.parseInt(dart2.getText().toString());
-                    if (temp != 25 && temp != 50) {
+                    if (temp != _25 && temp != bull) {
                         dartTwo = temp * 3;
                     }
-                    if (temp == 25) {
-                        dartTwo = 25;
+                    if (temp == _25) {
+                        dartTwo = _25;
                     }
-                    if (temp == 50) {
-                        dartTwo = 50;
+                    if (temp == bull) {
+                        dartTwo = bull;
                     }
                 }
                 else {
@@ -133,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart3_radio2:
                 if(validScore(Integer.parseInt(dart3.getText().toString()))) {
                     int temp = Integer.parseInt(dart3.getText().toString());
-                    if (temp != 25 && temp != 50) {
+                    if (temp != _25 && temp != bull) {
                         dartThree = temp * 2;
                     }
-                    if (temp == 25) {
-                        dartThree = 25;
+                    if (temp == _25) {
+                        dartThree = _25;
                     }
-                    if (temp == 50) {
-                        dartThree = 50;
+                    if (temp == bull) {
+                        dartThree = bull;
                     }
                 }
                 else {
@@ -150,14 +152,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.dart3_radio3:
                 if(validScore(Integer.parseInt(dart3.getText().toString()))) {
                     int temp = Integer.parseInt(dart3.getText().toString());
-                    if (temp != 25 && temp != 50) {
+                    if (temp != _25 && temp != bull) {
                         dartThree = temp * 3;
                     }
-                    if (temp == 25) {
-                        dartThree = 25;
+                    if (temp == _25) {
+                        dartThree = _25;
                     }
-                    if (temp == 50) {
-                        dartThree = 50;
+                    if (temp == bull) {
+                        dartThree = bull;
                     }
                 } else {
                     validInput = false;
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean validScore(int dart) {
         boolean temp = false;
         Log.i("validScore method"," " +dart);
-        if ((dart >= 0 && dart <= 20 || dart == 25 || dart == 50 )) {
+        if ((dart >= 0 && dart <= 20 || dart == _25 || dart == bull )) {
             return true;
         }
         return temp;
