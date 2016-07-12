@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * calculateScore()
      * Adds up the scores in text fields
-     * @return total, int
      */
     public void calculateScrore() {
         boolean validInput = true;
