@@ -1,6 +1,8 @@
 package com.example.xdog.dartsscore;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
      * calculateScore()
      * Adds up the scores in text fields
      */
-    public void calculateScrore() {
+    public int calculateScrore() {
         boolean validInput = true;
         int dartOne = 0;
         int dartThree = 0;
@@ -163,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         if ( validInput) {
-            int total = dartOne + dartTwo + dartThree;
-            Log.i("Score: " , " " + total);
+            return dartOne + dartTwo + dartThree;
         } else {
-            Log.i("Warning", " Invlaid input");
+            //TODO If -1 is returned add, catch error
+            return -1;
         }
 
     }
@@ -195,7 +197,12 @@ public class MainActivity extends AppCompatActivity {
             final Toast toastBasic = Toast.makeText(context,message, Toast.LENGTH_SHORT);
             toastBasic.show();
         } else {
-            calculateScrore();
+            Intent intent = new Intent(this, Scoreboard.class);
+            intent.putExtra("score",calculateScrore());
+            setResult(Activity.RESULT_OK,intent);
+            finish();
         }
+
+
     }
 }
