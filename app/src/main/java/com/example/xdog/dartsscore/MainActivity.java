@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * calculateScore()
-     * Adds up the scores in text fields
+     * Adds up the scores in editText fields
+     * @return score, int
      */
     public int calculateScrore() {
         boolean validInput = true;
@@ -182,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public boolean validScore(int dart) {
         boolean temp = false;
-        Log.i("validScore method"," " +dart);
         if ((dart >= 0 && dart <= 20 || dart == _25 || dart == bull )) {
             return true;
         }
