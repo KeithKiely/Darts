@@ -104,6 +104,7 @@ public class Scoreboard extends AppCompatActivity {
         }
     }//onActivityResult
 
+
     @Override
     public void onStart() {
         super.onStart();
