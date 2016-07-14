@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -23,7 +24,9 @@ public class Scoreboard extends AppCompatActivity {
     private ListView list1, list2;
     private ArrayAdapter listAdapter, listAdapter2;
     private int currentPlayer = 0;
-    private int finalScore;
+    private int gameScore;
+    private TextView p1Score, p2Score, playerName;
+    private Player player,player1;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -32,14 +35,22 @@ public class Scoreboard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Player player = new Player("Tom", 0, 1);
-        Player player1 = new Player("Barry", 0, 2);
+        gameScore = 101;
+        player = new Player("Tom", gameScore, 1);
+        player1 = new Player("Barry", gameScore, 2);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
 
         list1 = (ListView) findViewById(R.id.listView1);
         list2 = (ListView) findViewById(R.id.listView2);
+        p1Score = (TextView) findViewById(R.id.player1Score);
+        p2Score = (TextView) findViewById(R.id.player2Score);
+        playerName = (TextView) findViewById((R.id.nameTV));
+
+        p2Score.setText(""+gameScore);
+        p1Score.setText(""+gameScore);
+        playerName.setText(player.getPlayerName());
 
         p1scores = new ArrayList<Integer>();
         p1scores.add(player.getScore());
@@ -61,6 +72,7 @@ public class Scoreboard extends AppCompatActivity {
     public void openCalc(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivityForResult(intent, 1);
+        playerName.setText(player1.getPlayerName());
     }
 
     @Override
@@ -73,11 +85,17 @@ public class Scoreboard extends AppCompatActivity {
                 if (currentPlayer == 1) {
                     p1scores.add(result);
                     listAdapter.notifyDataSetChanged();
+                    Log.i("Player 1 score:",  " " +player.getScore());
+                    player.setScore(result);
+                    p1Score.setText(""+player.getScore());
                 }
                 if (currentPlayer == 2){
                     p2scores.add(result);
                     listAdapter2.notifyDataSetChanged();
+                    player1.setScore(result);
+                    p2Score.setText(""+player1.getScore());
                     currentPlayer = 0;
+                    playerName.setText(player.getPlayerName());
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
