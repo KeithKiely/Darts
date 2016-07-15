@@ -10,7 +10,7 @@ public class Player {
     private int score;
     private int playerNum;
 
-    private ArrayList<Integer> scores = new ArrayList<Integer>();
+    private ArrayList<Integer> scores = new ArrayList<>();
 
     public Player(String playerName, int score, int playerNum) {
         this.playerName = playerName;
@@ -39,6 +39,10 @@ public class Player {
     }
 
     public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void subtractScore(int score) {
         this.score -= score;
     }
 

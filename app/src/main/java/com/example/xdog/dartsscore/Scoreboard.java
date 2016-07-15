@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +26,10 @@ public class Scoreboard extends AppCompatActivity {
     private int gameScore;
     private TextView p1Score, p2Score, playerName;
     private Player player,player1;
+    static final String USER_ONE = "user1";
+    static final String USER_TWO = "user2";
+    static final String USER_ONE_Score = "user1Score";
+    static final String USER_TWO_Score = "user2Score";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -47,19 +50,20 @@ public class Scoreboard extends AppCompatActivity {
         p1Score = (TextView) findViewById(R.id.player1Score);
         p2Score = (TextView) findViewById(R.id.player2Score);
         playerName = (TextView) findViewById((R.id.nameTV));
+        String goal = "" + gameScore;
+        p2Score.setText(goal);
+        p1Score.setText(goal);
+        String playerNameTxt = getString(R.string.current_player) + " " +player.getPlayerName();
+        playerName.setText(playerNameTxt);
 
-        p2Score.setText(""+gameScore);
-        p1Score.setText(""+gameScore);
-        playerName.setText(player.getPlayerName());
-
-        p1scores = new ArrayList<Integer>();
+        p1scores = new ArrayList<>();
         p1scores.add(player.getScore());
 
-        p2scores = new ArrayList<Integer>();
+        p2scores = new ArrayList<>();
         p2scores.add(player1.getScore());
 
-        listAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_list_item_1,p1scores);
-        listAdapter2 = new ArrayAdapter<Integer>(this,android.R.layout.simple_list_item_1,p2scores);
+        listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1scores);
+        listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2scores);
         list1.setAdapter(listAdapter);
         list2.setAdapter(listAdapter2);
 
@@ -72,7 +76,42 @@ public class Scoreboard extends AppCompatActivity {
     public void openCalc(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivityForResult(intent, 1);
-        playerName.setText(player1.getPlayerName());
+        String playerNameTxt = getString(R.string.current_player) + " " +player1.getPlayerName();
+        playerName.setText(playerNameTxt);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance
+        p1scores = savedInstanceState.getIntegerArrayList(USER_ONE);
+        p2scores = savedInstanceState.getIntegerArrayList(USER_TWO);
+        player.setScore(savedInstanceState.getInt(USER_ONE_Score));
+        player1.setScore(savedInstanceState.getInt(USER_TWO_Score));
+        String p1ScoreTxt = ""+player.getScore();
+        String p2ScoreTxt = ""+player1.getScore();
+        p1Score.setText(p1ScoreTxt);
+        p2Score.setText(p2ScoreTxt);
+
+
+        listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1scores);
+        listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2scores);
+        list1.setAdapter(listAdapter);
+        list2.setAdapter(listAdapter2);
+        listAdapter.notifyDataSetChanged();
+        listAdapter2.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putSerializable(USER_ONE, p1scores);
+        savedInstanceState.putSerializable(USER_TWO, p2scores);
+        savedInstanceState.putInt(USER_ONE_Score,player.getScore());
+        savedInstanceState.putInt(USER_TWO_Score,player1.getScore());
+        //Always call the superclass so it can save the view hierarchy state
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -85,25 +124,34 @@ public class Scoreboard extends AppCompatActivity {
                 if (currentPlayer == 1) {
                     p1scores.add(result);
                     listAdapter.notifyDataSetChanged();
-                    Log.i("Player 1 score:",  " " +player.getScore());
-                    player.setScore(result);
-                    p1Score.setText(""+player.getScore());
+                    player.subtractScore(result);
+                    String p1ScoreTxt = ""+player.getScore();
+                    p1Score.setText(p1ScoreTxt);
+                    if (player.getScore() <= 0) {
+                        //// TODO: 15/07/2016 End game when score is bellow 0 (Start next round or quit to menu)
+                    }
                 }
                 if (currentPlayer == 2){
                     p2scores.add(result);
                     listAdapter2.notifyDataSetChanged();
-                    player1.setScore(result);
-                    p2Score.setText(""+player1.getScore());
+                    player1.subtractScore(result);
+                    String p2ScoreTxt = ""+player1.getScore();
+                    p2Score.setText(p2ScoreTxt);
                     currentPlayer = 0;
-                    playerName.setText(player.getPlayerName());
+                    String currentPlayer = getString(R.string.current_player) + " " +player.getPlayerName();
+                    playerName.setText(currentPlayer);
                 }
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
             }
         }
     }//onActivityResult
 
+    public int getGameScore() {
+        return gameScore;
+    }
+
+    public void setGameScore(int gameScore) {
+        this.gameScore = gameScore;
+    }
 
     @Override
     public void onStart() {

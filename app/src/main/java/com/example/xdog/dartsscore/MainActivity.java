@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
      * Adds up the scores in editText fields
      * @return score, int
      */
-    public int calculateScrore() {
+    public int calculateScore() {
         boolean validInput = true;
         int dartOne = 0;
         int dartThree = 0;
@@ -170,10 +169,8 @@ public class MainActivity extends AppCompatActivity {
         if ( validInput) {
             return dartOne + dartTwo + dartThree;
         } else {
-            //TODO If -1 is returned add, catch error
             return -1;
         }
-
     }
 
     /**
@@ -182,11 +179,10 @@ public class MainActivity extends AppCompatActivity {
      * @return true; boolean
      */
     public boolean validScore(int dart) {
-        boolean temp = false;
         if ((dart >= 0 && dart <= 20 || dart == _25 || dart == bull )) {
             return true;
         }
-        return temp;
+        return false;
     }
 
     public void done(View view) {
@@ -200,9 +196,17 @@ public class MainActivity extends AppCompatActivity {
             toastBasic.show();
         } else {
             Intent intent = new Intent(this, Scoreboard.class);
-            intent.putExtra("score",calculateScrore());
-            setResult(Activity.RESULT_OK,intent);
-            finish();
+            if (calculateScore() != -1) {
+                intent.putExtra("score", calculateScore());
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            } else {
+                Context context1 = getApplicationContext();
+                CharSequence message = "Invalid Entry";
+                //int duration = Toast.LENGTH_SHORT;
+                final Toast toastBasic = Toast.makeText(context1,message, Toast.LENGTH_SHORT);
+                toastBasic.show();
+            }
         }
 
 
