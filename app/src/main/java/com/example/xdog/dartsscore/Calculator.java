@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class Calculator extends AppCompatActivity {
     private EditText dart1, dart2, dart3;
     private RadioGroup group1, group2, group3;
     private final int bull = 50;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calculator);
         dart1 = (EditText) findViewById(R.id.dartOneTF);
         dart2 = (EditText) findViewById(R.id.dartTwoTF);
         dart3 = (EditText) findViewById(R.id.dartThreeTF);

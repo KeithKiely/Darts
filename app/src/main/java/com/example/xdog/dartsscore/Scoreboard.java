@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -74,7 +73,7 @@ public class Scoreboard extends AppCompatActivity {
     }
 
     public void openCalc(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Calculator.class);
         startActivityForResult(intent, 1);
         String playerNameTxt = getString(R.string.current_player) + " " +player1.getPlayerName();
         playerName.setText(playerNameTxt);
