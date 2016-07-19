@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Calculator extends AppCompatActivity {
     private EditText dart1, dart2, dart3;
+    private TextView player;
     private RadioGroup group1, group2, group3;
     private final int bull = 50;
     private final int _25 = 25;
@@ -24,6 +26,8 @@ public class Calculator extends AppCompatActivity {
         dart2 = (EditText) findViewById(R.id.dartTwoTF);
         dart3 = (EditText) findViewById(R.id.dartThreeTF);
 
+        player = (TextView) findViewById(R.id.playerNameTV);
+        player.setText(getIntent().getStringExtra("name"));
         group1 = (RadioGroup) findViewById(R.id.radioGroup1);
         group2 = (RadioGroup) findViewById(R.id.radioGroup2);
         group3 = (RadioGroup) findViewById(R.id.radioGroup3);

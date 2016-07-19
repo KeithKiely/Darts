@@ -1,8 +1,10 @@
 package com.example.xdog.dartsscore;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,23 +14,31 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class GameSetting extends AppCompatActivity implements OnSeekBarChangeListener{
     private RadioGroup matchScoreGr, numPlayersGr;
     private EditText name1, name2, name3, name4;
     private TextView leg;
     private RadioButton _501, _301, _101;
     private SeekBar numLegs;
-    private String nameOne, nameTwo, nameThree, nameFour;
+    private boolean name1Set, name2Set, name3Set, name4Set;
     private Button numPlayer1B, numPlayer2B, numPlayer3B, numPlayer4B;
     private int numPlayers = 0;
     private int gameScore, legs;
+    private Player player, player1,player2,player3;
+    private ArrayList<Player> players;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_setting);
-
-        matchScoreGr = (RadioGroup) findViewById(R.id.gameScore3rd);
+        players = new ArrayList<>();
+        name1Set = true;
+        name2Set = false;
+        name3Set = false;
+        name4Set = false;
+        matchScoreGr = (RadioGroup) findViewById(R.id.gameType);
         numPlayersGr = (RadioGroup) findViewById(R.id.numPlayerGroup);
 
         _501 = (RadioButton) findViewById(R.id.radioB501);
@@ -39,9 +49,12 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name2 = (EditText) findViewById(R.id.name2ET);
         name3 = (EditText) findViewById(R.id.name3ET);
         name4 = (EditText) findViewById(R.id.name4ET);
+
+        name2.setEnabled(false);
+        name3.setEnabled(false);
+        name4.setEnabled(false);
+
         leg = (TextView) findViewById(R.id.legsTV);
-
-
 
         numLegs = (SeekBar) findViewById(R.id.seekBar);
         numLegs.setOnSeekBarChangeListener(this);
@@ -50,6 +63,9 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         numPlayer2B = (Button) findViewById(R.id.numPlayer2);
         numPlayer3B= (Button) findViewById(R.id.numPlayer3);
         numPlayer4B = (Button) findViewById(R.id.numPlayer4);
+        numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
     }
 
 
@@ -65,16 +81,41 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
                 gameScore = 501;
                 break;
         }
-
-        nameOne = name1.getText().toString();
-        nameTwo = name2.getText().toString();
-        nameThree = name3.getText().toString();
-        nameFour = name4.getText().toString();
-
+        if (name1Set) {
+            Log.i("Name 1 Set: ", " fuck off");
+            String nameOne = name1.getText().toString().trim();
+            player = new Player(nameOne, gameScore, 1);
+            players.add(player);
+        }
+        if (name2Set){
+            String nameOne = name1.getText().toString().trim();
+            String nameTwo = name2.getText().toString().trim();
+            player = new Player(nameOne, gameScore, 1);
+            player1 = new Player(nameTwo, gameScore, 1);
+            players.add(player);
+            players.add(player1);
+        }
+        if (name3Set) {
+            String nameThree = name3.getText().toString().trim();
+            player = new Player(nameThree, gameScore, 1);
+            players.add(player);
+        }
+        if (name4Set) {
+            String nameFour = name4.getText().toString().trim();
+            player = new Player(nameFour, gameScore, 1);
+            players.add(player);
+        }
+        Intent intent = new Intent(this, Scoreboard.class);
+        intent.putParcelableArrayListExtra("Players",players);
+        startActivity(intent);
     }
 
     public void set1Players (View view) {
         numPlayers = 1;
+        name1Set = true;
+        name2Set = false;
+        name3Set = false;
+        name4Set = false;
         numPlayer1B.getBackground().clearColorFilter();
         numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
@@ -88,6 +129,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
     public void set2Players (View view) {
         numPlayers = 2;
+        name2Set = true;
+        name1Set = false;
+        name3Set = false;
+        name4Set = false;
         numPlayer2B.getBackground().clearColorFilter();
         numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
@@ -101,6 +146,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
     public void set3Players (View view) {
         numPlayers = 3;
+        name3Set = true;
+        name2Set = false;
+        name1Set = false;
+        name4Set = false;
         numPlayer3B.getBackground().clearColorFilter();
         numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
@@ -114,6 +163,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
     public void set4Players (View view) {
         numPlayers = 4;
+        name2Set = false;
+        name3Set = false;
+        name1Set = false;
+        name4Set = true;
         numPlayer4B.getBackground().clearColorFilter();
         numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
