@@ -37,4 +37,11 @@
     <string name="player">Player</string>
     <string name="_0">0</string>
     <string name="start">Start</string>
+    <string name="game_over">Game Over</string>
+    <string name="wins">Wins</string>
+    <string name="legs">Legs</string>
+    <string name="won">Rounds Won</string>
+    <string name="num">num</string>
+    <string name="lost">Rounds Lost</string>
+    <string name="done">Done</string>
 </resources>

@@ -28,6 +28,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
     private int gameScore, legs;
     private Player player, player1,player2,player3;
     private ArrayList<Player> players;
+    static final String NUMBER_OF_LEGS = "numLegs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +105,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
             player = new Player(nameFour, gameScore, 1);
             players.add(player);
         }
+        Log.i("Number of Legs: ", ""+legs);
         Intent intent = new Intent(this, Scoreboard.class);
         intent.putParcelableArrayListExtra("Players",players);
+        intent.putExtra(NUMBER_OF_LEGS, legs);
         startActivity(intent);
     }
 

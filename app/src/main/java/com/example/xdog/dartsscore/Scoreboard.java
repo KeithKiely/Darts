@@ -1,6 +1,7 @@
 package com.example.xdog.dartsscore;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,18 +19,18 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 
 public class Scoreboard extends AppCompatActivity {
-    private ArrayList<Integer> p1scores;
-    private ArrayList<Integer> p2scores;
+    private ArrayList<Integer> p1ScoreTVs;
+    private ArrayList<Integer> p2ScoreTVs;
     private ArrayList<Player> newPlayers;
     private ListView list1, list2;
     private ArrayAdapter listAdapter, listAdapter2;
     private int currentPlayer = 1;
-    private int gameScore, totalPlayers;
-    private TextView p1Score, p2Score, playerName, player2Name;
+    private int gameScore, totalPlayers, numLegs;
+    private TextView p1ScoreTV, p2ScoreTV, playerName, player2Name;
     static final String USER_ONE = "user1";
     static final String USER_TWO = "user2";
-    static final String USER_ONE_Score = "user1Score";
-    static final String USER_TWO_Score = "user2Score";
+    static final String ROUND_SCORE = "user1Score";
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -39,40 +40,45 @@ public class Scoreboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         newPlayers = getIntent().getParcelableArrayListExtra("Players");
+        numLegs = getIntent().getIntExtra(GameSetting.NUMBER_OF_LEGS,1);
+        Log.i("Num legs: ", ""+numLegs);
         totalPlayers = newPlayers.size();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
 
         list1 = (ListView) findViewById(R.id.listView1);
         list2 = (ListView) findViewById(R.id.listView2);
-        p1Score = (TextView) findViewById(R.id.player1Score);
-        p2Score = (TextView) findViewById(R.id.player2Score);
+        p1ScoreTV = (TextView) findViewById(R.id.player1ScoreTV);
+        p2ScoreTV = (TextView) findViewById(R.id.player2ScoreTV);
         playerName = (TextView) findViewById((R.id.nameTV));
         player2Name = (TextView) findViewById(R.id.p2NameTV);
 
         playerName.setText(newPlayers.get(0).getPlayerName());
         player2Name.setText(newPlayers.get(1).getPlayerName());
 
-        String goal = "" + newPlayers.get(0).getScore();
-        p2Score.setText(goal);
-        p1Score.setText(goal);
+
+        gameScore = newPlayers.get(0).getScore();
+        String tempScore = gameScore+"";
+
+        p2ScoreTV.setText(tempScore);
+        p1ScoreTV.setText(tempScore);
 
         if (newPlayers.size() == 1) {
-            p1scores = new ArrayList<>();
-            p1scores.add(newPlayers.get(0).getScore());
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1scores);
+            p1ScoreTVs = new ArrayList<>();
+            p1ScoreTVs.add(newPlayers.get(0).getScore());
+            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1ScoreTVs);
             list1.setAdapter(listAdapter);
         }
         if (newPlayers.size() == 2) {
             //player one
-            p1scores = new ArrayList<>();
-            p1scores.add(newPlayers.get(0).getScore());
+            p1ScoreTVs = new ArrayList<>();
+            p1ScoreTVs.add(newPlayers.get(0).getScore());
             //player two
-            p2scores = new ArrayList<>();
-            p2scores.add(newPlayers.get(1).getScore());
+            p2ScoreTVs = new ArrayList<>();
+            p2ScoreTVs.add(newPlayers.get(1).getScore());
 
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1scores);
-            listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2scores);
+            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1ScoreTVs);
+            listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2ScoreTVs);
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
         }
@@ -100,18 +106,17 @@ public class Scoreboard extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
         // Restore state members from saved instance
-        p1scores = savedInstanceState.getIntegerArrayList(USER_ONE);
-        p2scores = savedInstanceState.getIntegerArrayList(USER_TWO);
-        newPlayers.get(0).setScore(savedInstanceState.getInt(USER_ONE_Score));
-        newPlayers.get(1).setScore(savedInstanceState.getInt(USER_TWO_Score));
-        String p1ScoreTxt = ""+newPlayers.get(0).getScore();
-        String p2ScoreTxt = ""+newPlayers.get(1).getScore();
-        p1Score.setText(p1ScoreTxt);
-        p2Score.setText(p2ScoreTxt);
+        p1ScoreTVs = savedInstanceState.getIntegerArrayList(USER_ONE);
+        p2ScoreTVs = savedInstanceState.getIntegerArrayList(USER_TWO);
+        gameScore = savedInstanceState.getInt(ROUND_SCORE);
+        String p1ScoreTVTxt = ""+newPlayers.get(0).getScore();
+        String p2ScoreTVTxt = ""+newPlayers.get(1).getScore();
+        p1ScoreTV.setText(p1ScoreTVTxt);
+        p2ScoreTV.setText(p2ScoreTVTxt);
         currentPlayer = savedInstanceState.getInt("currentPlayer");
 
-        listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1scores);
-        listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2scores);
+        listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1ScoreTVs);
+        listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2ScoreTVs);
         list1.setAdapter(listAdapter);
         list2.setAdapter(listAdapter2);
         listAdapter.notifyDataSetChanged();
@@ -120,11 +125,9 @@ public class Scoreboard extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putSerializable(USER_ONE, p1scores);
-        savedInstanceState.putSerializable(USER_TWO, p2scores);
-        savedInstanceState.putInt(USER_ONE_Score,newPlayers.get(0).getScore());
-        if (newPlayers.size() == 2)
-        savedInstanceState.putInt(USER_TWO_Score,newPlayers.get(1).getScore());
+        savedInstanceState.putSerializable(USER_ONE, p1ScoreTVs);
+        savedInstanceState.putSerializable(USER_TWO, p2ScoreTVs);
+        savedInstanceState.putInt(ROUND_SCORE,gameScore);
         //Always call the superclass so it can save the view hierarchy state
 
         super.onSaveInstanceState(savedInstanceState);
@@ -137,23 +140,39 @@ public class Scoreboard extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 int result = data.getIntExtra("score", 0);
                 if (currentPlayer == 1) {
-                    p1scores.add(result);
+                    p1ScoreTVs.add(result);
                     listAdapter.notifyDataSetChanged();
                     newPlayers.get(0).subtractScore(result);
-                    String p1ScoreTxt = ""+newPlayers.get(0).getScore();
-                    p1Score.setText(p1ScoreTxt);
+                    String p1ScoreTVTxt = ""+newPlayers.get(0).getScore();
+                    p1ScoreTV.setText(p1ScoreTVTxt);
 
-                    /*if (player.getScore() <= 0) {
-                        //// TODO: 15/07/2016 End game when score is bellow 0 (Start next round or quit to menu)
-                        Log.i("Score low", ""+newPlayers.get(0).getScore());
-                    }*/
+                    for (int i = 0; i < newPlayers.size(); i++) {
+                        if (newPlayers.get(i).getScore() <= 0 && numLegs == 0) {
+                            //// TODO: 15/07/2016 End game when score is bellow 0 (Start next round or quit to menu)
+                            FragmentManager fm = getFragmentManager();
+                            GamerOverDialog dialogFragment = new GamerOverDialog ();
+                            dialogFragment.show(fm, "Game Over");
+                        }
+                        if (newPlayers.get(i).getScore() <= 0 && numLegs > 1) {
+                            Log.i("New game score: ", gameScore + "");
+                            String temp = gameScore+"";
+                            p1ScoreTV.setText(temp);
+                            p2ScoreTV.setText(temp);
+                            p1ScoreTVs.clear();
+                            p2ScoreTVs.clear();
+                            listAdapter.notifyDataSetChanged();
+                            listAdapter2.notifyDataSetChanged();
+                            numLegs--;
+                            newPlayers.get(i).setRoundWins(1);
+                        }
+                    }
                 }
                 if (currentPlayer == 2){
-                    p2scores.add(result);
+                    p2ScoreTVs.add(result);
                     listAdapter2.notifyDataSetChanged();
                     newPlayers.get(1).subtractScore(result);
-                    String p2ScoreTxt = ""+newPlayers.get(1).getScore();
-                    p2Score.setText(p2ScoreTxt);
+                    String p2ScoreTVTxt = ""+newPlayers.get(1).getScore();
+                    p2ScoreTV.setText(p2ScoreTVTxt);
                     String currentPlayer = " " +newPlayers.get(0).getPlayerName();
                     playerName.setText(currentPlayer);
                 }

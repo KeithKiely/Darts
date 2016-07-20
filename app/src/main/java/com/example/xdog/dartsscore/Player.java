@@ -12,6 +12,7 @@ public class Player implements Parcelable{
     private String playerName;
     private int score;
     private int playerNum;
+    private int roundWins;
 
     private ArrayList<Integer> scores = new ArrayList<>();
 
@@ -38,6 +39,15 @@ public class Player implements Parcelable{
             return new Player[size];
         }
     };
+
+    public int getRoundWins() {
+        return roundWins;
+    }
+
+    public void setRoundWins(int roundWins) {
+        this.roundWins += roundWins;
+    }
+
 
     public String getPlayerName() {
         return playerName;
