@@ -3,8 +3,8 @@ package com.example.xdog.dartsscore;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,10 +23,9 @@ public class Scoreboard extends AppCompatActivity {
     private ArrayList<Player> newPlayers;
     private ListView list1, list2;
     private ArrayAdapter listAdapter, listAdapter2;
-    private int currentPlayer = 0;
-    private int gameScore;
-    private TextView p1Score, p2Score, playerName;
-    private Player player,player1;
+    private int currentPlayer = 1;
+    private int gameScore, totalPlayers;
+    private TextView p1Score, p2Score, playerName, player2Name;
     static final String USER_ONE = "user1";
     static final String USER_TWO = "user2";
     static final String USER_ONE_Score = "user1Score";
@@ -40,6 +39,7 @@ public class Scoreboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         newPlayers = getIntent().getParcelableArrayListExtra("Players");
+        totalPlayers = newPlayers.size();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
 
@@ -48,8 +48,11 @@ public class Scoreboard extends AppCompatActivity {
         p1Score = (TextView) findViewById(R.id.player1Score);
         p2Score = (TextView) findViewById(R.id.player2Score);
         playerName = (TextView) findViewById((R.id.nameTV));
+        player2Name = (TextView) findViewById(R.id.p2NameTV);
 
         playerName.setText(newPlayers.get(0).getPlayerName());
+        player2Name.setText(newPlayers.get(1).getPlayerName());
+
         String goal = "" + newPlayers.get(0).getScore();
         p2Score.setText(goal);
         p1Score.setText(goal);
@@ -72,7 +75,6 @@ public class Scoreboard extends AppCompatActivity {
             listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2scores);
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
-            Log.i("Current Score 2" ,""+newPlayers.get(1).getScore());
         }
         if (newPlayers.size() == 2) {
 
@@ -88,12 +90,9 @@ public class Scoreboard extends AppCompatActivity {
 
     public void openCalc(View view) {
         Intent intent = new Intent(this, Calculator.class);
-        intent.putExtra("name", newPlayers.get(currentPlayer).getPlayerName());
+        intent.putExtra("name", newPlayers.get(currentPlayer -1).getPlayerName());
+        intent.putExtra("currentPlayer", currentPlayer);
         startActivityForResult(intent, 1);
-        if (newPlayers.size() == 2) {
-            String playerNameTxt = getString(R.string.current_player) + " " + newPlayers.get(1).getPlayerName();
-            playerName.setText(playerNameTxt);
-        }
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -103,13 +102,13 @@ public class Scoreboard extends AppCompatActivity {
         // Restore state members from saved instance
         p1scores = savedInstanceState.getIntegerArrayList(USER_ONE);
         p2scores = savedInstanceState.getIntegerArrayList(USER_TWO);
-        player.setScore(savedInstanceState.getInt(USER_ONE_Score));
-        player1.setScore(savedInstanceState.getInt(USER_TWO_Score));
-        String p1ScoreTxt = ""+player.getScore();
-        String p2ScoreTxt = ""+player1.getScore();
+        newPlayers.get(0).setScore(savedInstanceState.getInt(USER_ONE_Score));
+        newPlayers.get(1).setScore(savedInstanceState.getInt(USER_TWO_Score));
+        String p1ScoreTxt = ""+newPlayers.get(0).getScore();
+        String p2ScoreTxt = ""+newPlayers.get(1).getScore();
         p1Score.setText(p1ScoreTxt);
         p2Score.setText(p2ScoreTxt);
-
+        currentPlayer = savedInstanceState.getInt("currentPlayer");
 
         listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1scores);
         listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2scores);
@@ -136,7 +135,6 @@ public class Scoreboard extends AppCompatActivity {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                currentPlayer++;
                 int result = data.getIntExtra("score", 0);
                 if (currentPlayer == 1) {
                     p1scores.add(result);
@@ -144,6 +142,7 @@ public class Scoreboard extends AppCompatActivity {
                     newPlayers.get(0).subtractScore(result);
                     String p1ScoreTxt = ""+newPlayers.get(0).getScore();
                     p1Score.setText(p1ScoreTxt);
+
                     /*if (player.getScore() <= 0) {
                         //// TODO: 15/07/2016 End game when score is bellow 0 (Start next round or quit to menu)
                         Log.i("Score low", ""+newPlayers.get(0).getScore());
@@ -155,9 +154,13 @@ public class Scoreboard extends AppCompatActivity {
                     newPlayers.get(1).subtractScore(result);
                     String p2ScoreTxt = ""+newPlayers.get(1).getScore();
                     p2Score.setText(p2ScoreTxt);
-                    currentPlayer = 0;
-                    String currentPlayer = getString(R.string.current_player) + " " +newPlayers.get(0).getPlayerName();
+                    String currentPlayer = " " +newPlayers.get(0).getPlayerName();
                     playerName.setText(currentPlayer);
+                }
+                if(currentPlayer == totalPlayers) {
+                    currentPlayer = 1;
+                } else {
+                    currentPlayer++;
                 }
             }
         }

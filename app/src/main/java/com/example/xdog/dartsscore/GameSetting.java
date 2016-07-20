@@ -82,7 +82,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
                 break;
         }
         if (name1Set) {
-            Log.i("Name 1 Set: ", " fuck off");
             String nameOne = name1.getText().toString().trim();
             player = new Player(nameOne, gameScore, 1);
             players.add(player);
@@ -134,7 +133,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name3Set = false;
         name4Set = false;
         numPlayer2B.getBackground().clearColorFilter();
-        numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer1B.getBackground().clearColorFilter();
         numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         name3.setEnabled(false);
@@ -151,8 +150,8 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name1Set = false;
         name4Set = false;
         numPlayer3B.getBackground().clearColorFilter();
-        numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer2B.getBackground().clearColorFilter();
+        numPlayer1B.getBackground().clearColorFilter();
         numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         name3.setEnabled(true);
         name4.setEnabled(false);
