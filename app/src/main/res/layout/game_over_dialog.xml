@@ -38,54 +38,83 @@
             android:layout_marginLeft="4dp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/legs"
-        android:id="@+id/legsTV"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:textSize="20sp"
-        android:layout_marginBottom="8dp" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/won"
-            android:id="@+id/wonTV"
+            android:text="@string/legs"
+            android:id="@+id/legsTV"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"
             android:layout_marginRight="4dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/num"
-            android:id="@+id/numWinTV"
+            android:text="New Text"
+            android:id="@+id/numRoundsTV"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
             android:layout_marginLeft="4dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/won"
+            android:id="@+id/wonTV"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/num"
+            android:id="@+id/numWinTV"
+            android:layout_marginLeft="4dp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lost"
             android:id="@+id/lostTV"
-            android:layout_marginRight="4dp" />
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/num"
-            android:id="@+id/textView6"
-            android:layout_marginLeft="4dp" />
+            android:id="@+id/numLoseTV"
+            android:layout_marginLeft="4dp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <Button

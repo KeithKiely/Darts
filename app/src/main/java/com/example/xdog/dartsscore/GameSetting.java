@@ -84,12 +84,20 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         }
         if (name1Set) {
             String nameOne = name1.getText().toString().trim();
+            if (nameOne.equals("")) {
+                nameOne = "Player 1";
+            }
             player = new Player(nameOne, gameScore, 1);
             players.add(player);
         }
         if (name2Set){
             String nameOne = name1.getText().toString().trim();
             String nameTwo = name2.getText().toString().trim();
+            if (nameOne.equals("")) {
+                nameOne = "Player 1";
+            }if (nameTwo.equals("")) {
+                nameTwo = "Player 2";
+            }
             player = new Player(nameOne, gameScore, 1);
             player1 = new Player(nameTwo, gameScore, 1);
             players.add(player);

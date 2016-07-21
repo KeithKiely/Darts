@@ -44,4 +44,7 @@
     <string name="num">num</string>
     <string name="lost">Rounds Lost</string>
     <string name="done">Done</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
