@@ -32,6 +32,9 @@ public class GamerOverDialog extends DialogFragment {
         return rootView;
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+    }
+    public void onStart(){
         rWins = (TextView) rootView.findViewById(R.id.numWinTV);
         rLose = (TextView) rootView.findViewById(R.id.numLoseTV);
         rounds = (TextView) rootView.findViewById(R.id.numRoundsTV);
