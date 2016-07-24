@@ -25,14 +25,14 @@ public class Scoreboard extends AppCompatActivity {
     private ListView list1, list2;
     private ArrayAdapter listAdapter, listAdapter2;
     private int currentPlayer = 1;
-    private int gameScore, totalPlayers, numLegs, p1RoundWins, p2RoundWins,p3RoundWins, p4RoundWins;
+    private int gameScore, totalPlayers, numLegs,totalLegs, p1RoundWins, p2RoundWins,p3RoundWins, p4RoundWins;
     private TextView p1ScoreTV, p2ScoreTV, playerName, player2Name;
 
     static final String USER_ONE = "user1";
     static final String USER_TWO = "user2";
     static final String ROUND_SCORE = "user1Score";
-    static final String P1_ROUDN_WINS = "user1RWins";
-    static final String P2_ROUDN_WINS = "user1RWins";
+    static final String P1_ROUMD_WINS = "user1RWins";
+    static final String P2_ROUND_WINS = "user2RWins";
     static final String NUM_ROUNDS = "numberOfRounds";
     static final String PLAYER_NAME = "winnersName";
 
@@ -46,16 +46,18 @@ public class Scoreboard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scoreboard);
+
         p1RoundWins =0;
         p2RoundWins =0;
         p3RoundWins =0;
         p4RoundWins =0;
 
         newPlayers = getIntent().getParcelableArrayListExtra("Players");
+        totalLegs= getIntent().getIntExtra(GameSetting.NUMBER_OF_LEGS,1);
         numLegs = getIntent().getIntExtra(GameSetting.NUMBER_OF_LEGS,1);
         totalPlayers = newPlayers.size();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoreboard);
 
         list1 = (ListView) findViewById(R.id.listView1);
         list2 = (ListView) findViewById(R.id.listView2);
@@ -192,12 +194,11 @@ public class Scoreboard extends AppCompatActivity {
                     listAdapter.notifyDataSetChanged();
                 }
                 //If game over
-                if (newPlayers.get(i).getScore() <= 0 && numLegs <= 0) {
-                    p1RoundWins ++;
+                if ( numLegs <= 0) {
                     bundle = new Bundle();
-                    bundle.putInt(P1_ROUDN_WINS, p1RoundWins);
-                    bundle.putInt(P2_ROUDN_WINS, p2RoundWins);
-                    bundle.putInt(NUM_ROUNDS, numLegs);
+                    bundle.putInt(P1_ROUMD_WINS, p1RoundWins);
+                    bundle.putInt(P2_ROUND_WINS, p2RoundWins);
+                    bundle.putInt(NUM_ROUNDS, totalLegs);
                     bundle.putString(PLAYER_NAME, newPlayers.get(currentPlayer -1).getPlayerName());
 
                     FragmentManager fm = getFragmentManager();

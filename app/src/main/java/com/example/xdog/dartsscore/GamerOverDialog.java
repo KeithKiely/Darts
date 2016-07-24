@@ -31,19 +31,21 @@ public class GamerOverDialog extends DialogFragment {
         getDialog().setTitle("Simple Dialog");
         return rootView;
     }
-    public void onViewCreated(View view, Bundle savedInstanceState) {
 
-    }
+
     public void onStart(){
+        super.onStart();
         rWins = (TextView) rootView.findViewById(R.id.numWinTV);
         rLose = (TextView) rootView.findViewById(R.id.numLoseTV);
         rounds = (TextView) rootView.findViewById(R.id.numRoundsTV);
         name = (TextView) rootView.findViewById(R.id.playerNameTV);
-        Log.i("Game over dialog: " , getArguments().getInt(Scoreboard.P1_ROUDN_WINS)+" wins");
-        String roundWins = ""+ Scoreboard.bundle.getInt(Scoreboard.P1_ROUDN_WINS);
-        String roundLose = ""+ Scoreboard.bundle.getInt(Scoreboard.P2_ROUDN_WINS);
+
+        Log.i("Game over dialog: " , getArguments().getInt(Scoreboard.P1_ROUMD_WINS)+" wins");
+        String roundWins = ""+ Scoreboard.bundle.getInt(Scoreboard.P1_ROUMD_WINS);
+        String roundLose = ""+ Scoreboard.bundle.getInt(Scoreboard.P2_ROUND_WINS);
         String numLegs = ""+ Scoreboard.bundle.getInt(Scoreboard.NUM_ROUNDS);
         String winnersName = "" + getArguments().getString(Scoreboard.PLAYER_NAME);
+
         rWins.setText(roundWins);
         rLose.setText(roundLose);
         rounds.setText(numLegs);
