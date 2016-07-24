@@ -2,9 +2,11 @@ package com.example.xdog.dartsscore;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ public class Scoreboard extends AppCompatActivity {
     private int currentPlayer = 1;
     private int gameScore, totalPlayers, numLegs,totalLegs, p1RoundWins, p2RoundWins,p3RoundWins, p4RoundWins;
     private TextView p1ScoreTV, p2ScoreTV, playerName, player2Name;
+    private boolean roundOver = false;
 
     static final String USER_ONE = "user1";
     static final String USER_TWO = "user2";
@@ -65,8 +68,8 @@ public class Scoreboard extends AppCompatActivity {
         p2ScoreTV = (TextView) findViewById(R.id.player2ScoreTV);
         playerName = (TextView) findViewById((R.id.nameTV));
         player2Name = (TextView) findViewById(R.id.p2NameTV);
-
         playerName.setText(newPlayers.get(0).getPlayerName());
+
         if (newPlayers.size() == 2) {
             player2Name.setText(newPlayers.get(1).getPlayerName());
         }
@@ -95,10 +98,10 @@ public class Scoreboard extends AppCompatActivity {
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
         }
-        if (newPlayers.size() == 2) {
+        if (newPlayers.size() == 3) {
 
         }
-        if (newPlayers.size() == 3) {
+        if (newPlayers.size() == 4) {
 
         }
 
@@ -169,19 +172,16 @@ public class Scoreboard extends AppCompatActivity {
                 String currentPlayer = " " +newPlayers.get(0).getPlayerName();
                 playerName.setText(currentPlayer);
             }//End of player 2
-
             for (int i = 0; i < newPlayers.size(); i++) {
-                //Round Over
+                ////////////////////////////////////////////Round Over
                 if (newPlayers.get(i).getScore() < 1){
                     newPlayers.get(i).setScore(gameScore);
                     numLegs--;
-                    currentPlayer = 1; //ToDo Check this later (make sure that player resets to player 1 at start of round)
+                    roundOver = true;
                     if (i == 0) {
                         p1RoundWins++;
-                        Log.i("Scoreboard: "," P1 has won " +p1RoundWins + " rounds");
                     }if (i == 1) {
                         p2RoundWins++;
-                        Log.i("Scoreboard: "," P2 has won " +p2RoundWins + " rounds");
                     }
                     String temp = gameScore+"";
                     p1ScoreTV.setText(temp);
@@ -193,7 +193,8 @@ public class Scoreboard extends AppCompatActivity {
                     }
                     listAdapter.notifyDataSetChanged();
                 }
-                //If game over
+                Log.i("Scoreboard: ", "rounds left " + numLegs);
+                //////////////////////////////////////////////If game over
                 if ( numLegs <= 0) {
                     bundle = new Bundle();
                     bundle.putInt(P1_ROUMD_WINS, p1RoundWins);
@@ -207,21 +208,13 @@ public class Scoreboard extends AppCompatActivity {
                     dialogFragment.show(fm, "Game Over");
                 }
             }
-            if(currentPlayer == totalPlayers) {
+            if(currentPlayer == totalPlayers && !roundOver) {
                 currentPlayer = 1;
             } else {
                 currentPlayer++;
             }
         }
     }//onActivityResult
-
-    public int getGameScore() {
-        return gameScore;
-    }
-
-    public void setGameScore(int gameScore) {
-        this.gameScore = gameScore;
-    }
 
     @Override
     public void onStart() {
@@ -261,5 +254,22 @@ public class Scoreboard extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(getResources().getString(R.string.close_game))
+                .setMessage(getResources().getString(R.string.are_you_ready_to_close_game))
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

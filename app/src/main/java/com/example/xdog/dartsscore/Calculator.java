@@ -190,11 +190,12 @@ public class Calculator extends AppCompatActivity {
     }
 
     public void done(View view) {
+        Context context, context1;
         if (dart1.getText().toString().trim().isEmpty() ||
                 dart2.getText().toString().trim().isEmpty() ||
                 dart1.getText().toString().trim().isEmpty()) {
-            Context context = getApplicationContext();
-            CharSequence message = "Score Fields cannot be left empty";
+            context = getApplicationContext();
+            CharSequence message = getResources().getString(R.string.no_empty_fields);
             //int duration = Toast.LENGTH_SHORT;
             final Toast toastBasic = Toast.makeText(context,message, Toast.LENGTH_SHORT);
             toastBasic.show();
@@ -205,14 +206,12 @@ public class Calculator extends AppCompatActivity {
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             } else {
-                Context context1 = getApplicationContext();
-                CharSequence message = "Invalid Entry";
+                context1 = getApplicationContext();
+                CharSequence message = getResources().getString(R.string.invalid_entry);
                 //int duration = Toast.LENGTH_SHORT;
                 final Toast toastBasic = Toast.makeText(context1,message, Toast.LENGTH_SHORT);
                 toastBasic.show();
             }
         }
-
-
     }
 }

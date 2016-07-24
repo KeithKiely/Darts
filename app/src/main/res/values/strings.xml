@@ -44,6 +44,11 @@
     <string name="num">num</string>
     <string name="lost">Rounds Lost</string>
     <string name="done">Done</string>
+    <string name="close_game">Close Game</string>
+    <string name="number_legs_not_set">Legs cannot be Zero</string>
+    <string name="invalid_entry">Invalid Entry</string>
+    <string name="no_empty_fields">Fields cannot be left empty</string>
+    <string name="are_you_ready_to_close_game">Are you sure you want to end the game?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

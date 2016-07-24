@@ -1,5 +1,6 @@
 package com.example.xdog.dartsscore;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
     private SeekBar numLegs;
     private boolean name1Set, name2Set, name3Set, name4Set;
     private Button numPlayer1B, numPlayer2B, numPlayer3B, numPlayer4B;
-    private int numPlayers = 0;
     private int gameScore, legs;
     private Player player, player1,player2,player3;
     private ArrayList<Player> players;
@@ -99,7 +100,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
                 nameTwo = "Player 2";
             }
             player = new Player(nameOne, gameScore, 1);
-            player1 = new Player(nameTwo, gameScore, 1);
+            player1 = new Player(nameTwo, gameScore, 2);
             players.add(player);
             players.add(player1);
         }
@@ -113,15 +114,20 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
             player = new Player(nameFour, gameScore, 1);
             players.add(player);
         }
-        Log.i("Number of Legs: ", ""+legs);
-        Intent intent = new Intent(this, Scoreboard.class);
-        intent.putParcelableArrayListExtra("Players",players);
-        intent.putExtra(NUMBER_OF_LEGS, legs);
-        startActivity(intent);
+        if (legs <= 0) {
+            Context context1 = getApplicationContext();
+            CharSequence message = getResources().getString(R.string.number_legs_not_set);
+            final Toast toastBasic = Toast.makeText(context1,message, Toast.LENGTH_SHORT);
+            toastBasic.show();
+        } else {
+            Intent intent = new Intent(this, Scoreboard.class);
+            intent.putParcelableArrayListExtra("Players", players);
+            intent.putExtra(NUMBER_OF_LEGS, legs);
+            startActivity(intent);
+        }
     }
 
     public void set1Players (View view) {
-        numPlayers = 1;
         name1Set = true;
         name2Set = false;
         name3Set = false;
@@ -138,7 +144,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
 
     public void set2Players (View view) {
-        numPlayers = 2;
         name2Set = true;
         name1Set = false;
         name3Set = false;
@@ -155,7 +160,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
 
     public void set3Players (View view) {
-        numPlayers = 3;
         name3Set = true;
         name2Set = false;
         name1Set = false;
@@ -172,7 +176,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
 
     public void set4Players (View view) {
-        numPlayers = 4;
         name2Set = false;
         name3Set = false;
         name1Set = false;
