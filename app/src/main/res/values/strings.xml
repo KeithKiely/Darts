@@ -42,6 +42,7 @@
     <string name="legs">Legs</string>
     <string name="won">Rounds Won</string>
     <string name="num">num</string>
+    <string name="round_over">Round Over</string>
     <string name="lost">Rounds Lost</string>
     <string name="done">Done</string>
     <string name="close_game">Close Game</string>

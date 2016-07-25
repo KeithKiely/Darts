@@ -3,9 +3,8 @@ package com.example.xdog.dartsscore;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,12 +23,26 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
     private TextView leg;
     private RadioButton _501, _301, _101;
     private SeekBar numLegs;
-    private boolean name1Set, name2Set, name3Set, name4Set;
     private Button numPlayer1B, numPlayer2B, numPlayer3B, numPlayer4B;
-    private int gameScore, legs;
+
+    private boolean name1Set, name2Set, name3Set, name4Set;
+    private int gameScore, legs, totalPlayers;
+
     private Player player, player1,player2,player3;
     private ArrayList<Player> players;
-    static final String NUMBER_OF_LEGS = "numLegs";
+
+    public static final String NUMBER_OF_LEGS = "numLegs";
+    /*final String SCORE = "score";
+    final String TOTAL_PLAYERS = "total_players";
+    final String PLAYER_1_SET = "player1Set";
+    final String PLAYER_2_SET = "player2Set";
+    final String PLAYER_3_SET = "player3Set";
+    final String PLAYER_4_SET = "player4Set";
+    final String PLAYER_1 = "player1";
+    final String PLAYER_2 = "player2";
+    final String PLAYER_3 = "player3";
+    final String PLAYER_4 = "player4";
+    final String PLAYERS = "players";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +53,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name2Set = false;
         name3Set = false;
         name4Set = false;
+
         matchScoreGr = (RadioGroup) findViewById(R.id.gameType);
         numPlayersGr = (RadioGroup) findViewById(R.id.numPlayerGroup);
 
@@ -70,8 +84,8 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
     }
 
-
     public void startGame(View view) {
+        players.clear();
         switch (matchScoreGr.getCheckedRadioButtonId()) {
             case R.id.radioB101:
                 gameScore = 101;
@@ -125,6 +139,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
             intent.putExtra(NUMBER_OF_LEGS, legs);
             startActivity(intent);
         }
+        totalPlayers = players.size();
     }
 
     public void set1Players (View view) {
@@ -206,4 +221,41 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
+
+    /*@Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(NUMBER_OF_LEGS, legs);
+        outState.putInt(SCORE, gameScore);
+        outState.putInt(TOTAL_PLAYERS,totalPlayers);
+        outState.putBoolean(PLAYER_1_SET,name1Set);
+        outState.putBoolean(PLAYER_2_SET,name2Set);
+        outState.putBoolean(PLAYER_3_SET,name3Set);
+        outState.putBoolean(PLAYER_4_SET,name4Set);
+        if (totalPlayers == 1) {
+            outState.putParcelable(PLAYER_1, player);
+        }
+        if (totalPlayers == 2) {
+            outState.putParcelable(PLAYER_2, player1);
+        }
+        outState.putSerializable(PLAYERS, players);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        legs = savedInstanceState.getInt(NUMBER_OF_LEGS);
+        gameScore = savedInstanceState.getInt(SCORE);
+        name1Set = savedInstanceState.getBoolean(PLAYER_1_SET);
+        name2Set = savedInstanceState.getBoolean(PLAYER_2_SET);
+        name3Set = savedInstanceState.getBoolean(PLAYER_3_SET);
+        name4Set = savedInstanceState.getBoolean(PLAYER_4_SET);
+        totalPlayers = savedInstanceState.getInt(TOTAL_PLAYERS);
+        if (totalPlayers == 1)
+        player = savedInstanceState.getParcelable(PLAYER_1);
+        if (totalPlayers == 2)
+        player2 = savedInstanceState.getParcelable(PLAYER_2);
+        players = (ArrayList<Player>) savedInstanceState.getSerializable(PLAYERS);
+
+    }*/
 }
