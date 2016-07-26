@@ -69,6 +69,8 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name2.setEnabled(false);
         name3.setEnabled(false);
         name4.setEnabled(false);
+        name3.setVisibility(View.INVISIBLE);
+        name4.setVisibility(View.INVISIBLE);
 
         leg = (TextView) findViewById(R.id.legsTV);
 
@@ -79,9 +81,14 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         numPlayer2B = (Button) findViewById(R.id.numPlayer2);
         numPlayer3B= (Button) findViewById(R.id.numPlayer3);
         numPlayer4B = (Button) findViewById(R.id.numPlayer4);
-        numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer3B.setEnabled(false);
+        numPlayer4B.setEnabled(false);
+        numPlayer4B.setVisibility(View.INVISIBLE);
+        numPlayer3B.setVisibility(View.INVISIBLE);
+
     }
 
     public void startGame(View view) {
@@ -147,10 +154,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name2Set = false;
         name3Set = false;
         name4Set = false;
-        numPlayer1B.getBackground().clearColorFilter();
-        numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer2B.getBackground().clearColorFilter();
+        numPlayer3B.getBackground().clearColorFilter();
+        numPlayer4B.getBackground().clearColorFilter();
         name3.setEnabled(false);
         name4.setEnabled(false);
         name2.setEnabled(false);
@@ -163,10 +170,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name1Set = false;
         name3Set = false;
         name4Set = false;
-        numPlayer2B.getBackground().clearColorFilter();
+        numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer1B.getBackground().clearColorFilter();
-        numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer3B.getBackground().clearColorFilter();
+        numPlayer4B.getBackground().clearColorFilter();
         name3.setEnabled(false);
         name4.setEnabled(false);
         name2.setEnabled(true);
@@ -179,10 +186,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name2Set = false;
         name1Set = false;
         name4Set = false;
-        numPlayer3B.getBackground().clearColorFilter();
+        numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
         numPlayer2B.getBackground().clearColorFilter();
         numPlayer1B.getBackground().clearColorFilter();
-        numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer4B.getBackground().clearColorFilter();
         name3.setEnabled(true);
         name4.setEnabled(false);
         name2.setEnabled(true);
@@ -195,10 +202,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name3Set = false;
         name1Set = false;
         name4Set = true;
-        numPlayer4B.getBackground().clearColorFilter();
-        numPlayer2B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        numPlayer3B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        numPlayer1B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer4B.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        numPlayer2B.getBackground().clearColorFilter();
+        numPlayer3B.getBackground().clearColorFilter();
+        numPlayer1B.getBackground().clearColorFilter();
         name3.setEnabled(true);
         name4.setEnabled(true);
         name2.setEnabled(true);

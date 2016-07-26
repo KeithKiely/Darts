@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -220,6 +221,7 @@ public class Scoreboard extends AppCompatActivity {
                     newPlayers.get(i).setScore(gameScore);
                     numLegs--;
                     roundOver = true;
+                    currentPlayer = 1;
                     if (i == 0) {
                         p1RoundWins++;
                     }if (i == 1) {
@@ -255,7 +257,11 @@ public class Scoreboard extends AppCompatActivity {
                     dialogFragment.show(fm, "Game Over");
                 }
             }
-            if(currentPlayer == totalPlayers && !roundOver) {
+            if (roundOver){
+                currentPlayer = totalPlayers;
+                roundOver = false;
+            }
+            if(currentPlayer == totalPlayers) {
                 currentPlayer = 1;
             } else {
                 currentPlayer++;
