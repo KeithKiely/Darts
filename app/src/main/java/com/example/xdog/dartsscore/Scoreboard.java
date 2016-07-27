@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -35,12 +35,15 @@ public class Scoreboard extends AppCompatActivity {
     /*static final String USER_ONE = "user1";
     static final String USER_TWO = "user2";
     static final String CURRENT_PLAYER = "currentPlayer";
-    static final String TOTAL_PLAYERS = "totalPlayers";
+
     static final String ROUND_SCORE = "user1Score";*/
-    static final String P1_ROUMD_WINS = "user1RWins";
+    static final String TOTAL_PLAYERS = "totalPlayers";
+    static final String P1_ROUND_WINS = "user1RWins";
     static final String P2_ROUND_WINS = "user2RWins";
     static final String NUM_ROUNDS = "numberOfRounds";
     static final String PLAYER_NAME = "winnersName";
+    static final String PLAYER_1_NAME = "player1Name";
+    static final String PLAYER_2_NAME = "player2Name";
 
     static Bundle bundle;
 
@@ -54,6 +57,9 @@ public class Scoreboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         p1RoundWins =0;
         p2RoundWins =0;
@@ -73,21 +79,21 @@ public class Scoreboard extends AppCompatActivity {
         playerName = (TextView) findViewById((R.id.nameTV));
         playerName.setText(newPlayers.get(0).getPlayerName());
 
+        gameScore = newPlayers.get(0).getScore();
+        String tempScore = gameScore+"";
+        p1ScoreTV.setText(tempScore);
         if (totalPlayers == 2) {
             player2Name = (TextView) findViewById(R.id.p2NameTV);
             player2Name.setText(newPlayers.get(1).getPlayerName());
+            p2ScoreTV.setText(tempScore);
         }
-        gameScore = newPlayers.get(0).getScore();
-        String tempScore = gameScore+"";
-
-        p2ScoreTV.setText(tempScore);
-        p1ScoreTV.setText(tempScore);
 
         if (totalPlayers == 1) {
             p1Scores = new ArrayList<>();
             p1Scores.add(newPlayers.get(0).getScore());
             listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
             list1.setAdapter(listAdapter);
+            p2ScoreTV.setVisibility(View.INVISIBLE);
         }
         if (totalPlayers == 2) {
             //player one
@@ -246,7 +252,7 @@ public class Scoreboard extends AppCompatActivity {
                 // If game over
                 if ( numLegs <= 0) {
                     bundle = new Bundle();
-                    bundle.putInt(P1_ROUMD_WINS, p1RoundWins);
+                    bundle.putInt(P1_ROUND_WINS, p1RoundWins);
                     bundle.putInt(P2_ROUND_WINS, p2RoundWins);
                     bundle.putInt(NUM_ROUNDS, totalLegs);
                     bundle.putString(PLAYER_NAME, newPlayers.get(currentPlayer -1).getPlayerName());
@@ -284,5 +290,21 @@ public class Scoreboard extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public void openInfo(View view) {
+        bundle = new Bundle();
+        bundle.putInt(P1_ROUND_WINS, p1RoundWins);
+        bundle.putInt(P2_ROUND_WINS, p2RoundWins);
+        bundle.putInt(NUM_ROUNDS, totalLegs);
+        bundle.putInt(TOTAL_PLAYERS, totalPlayers);
+        bundle.putString(PLAYER_1_NAME, newPlayers.get(0).getPlayerName());
+        if (totalPlayers == 2)
+        bundle.putString(PLAYER_2_NAME, newPlayers.get(1).getPlayerName());
+
+        FragmentManager fm = getFragmentManager();
+        InfoFragment infoFragment = new InfoFragment ();
+        infoFragment.setArguments(bundle);
+        infoFragment.show(fm, "Game Over");
     }
 }

@@ -28,7 +28,7 @@ public class GamerOverDialog extends DialogFragment {
                 getActivity().finish();
             }
         });
-        getDialog().setTitle("Simple Dialog");
+        getDialog().setTitle(getResources().getString(R.string.game_over));
         return rootView;
     }
 
@@ -40,8 +40,7 @@ public class GamerOverDialog extends DialogFragment {
         rounds = (TextView) rootView.findViewById(R.id.numRoundsTV);
         name = (TextView) rootView.findViewById(R.id.playerNameTV);
 
-        Log.i("Game over dialog: " , getArguments().getInt(Scoreboard.P1_ROUMD_WINS)+" wins");
-        String roundWins = ""+ Scoreboard.bundle.getInt(Scoreboard.P1_ROUMD_WINS);
+        String roundWins = ""+ Scoreboard.bundle.getInt(Scoreboard.P1_ROUND_WINS);
         String roundLose = ""+ Scoreboard.bundle.getInt(Scoreboard.P2_ROUND_WINS);
         String numLegs = ""+ Scoreboard.bundle.getInt(Scoreboard.NUM_ROUNDS);
         String winnersName = "" + getArguments().getString(Scoreboard.PLAYER_NAME);
