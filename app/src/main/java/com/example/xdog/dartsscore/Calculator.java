@@ -217,5 +217,9 @@ public class Calculator extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
 }

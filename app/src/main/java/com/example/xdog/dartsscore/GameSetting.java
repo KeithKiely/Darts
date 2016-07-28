@@ -232,41 +232,4 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
-
-    /*@Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(NUMBER_OF_LEGS, legs);
-        outState.putInt(SCORE, gameScore);
-        outState.putInt(TOTAL_PLAYERS,totalPlayers);
-        outState.putBoolean(PLAYER_1_SET,name1Set);
-        outState.putBoolean(PLAYER_2_SET,name2Set);
-        outState.putBoolean(PLAYER_3_SET,name3Set);
-        outState.putBoolean(PLAYER_4_SET,name4Set);
-        if (totalPlayers == 1) {
-            outState.putParcelable(PLAYER_1, player);
-        }
-        if (totalPlayers == 2) {
-            outState.putParcelable(PLAYER_2, player1);
-        }
-        outState.putSerializable(PLAYERS, players);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        legs = savedInstanceState.getInt(NUMBER_OF_LEGS);
-        gameScore = savedInstanceState.getInt(SCORE);
-        name1Set = savedInstanceState.getBoolean(PLAYER_1_SET);
-        name2Set = savedInstanceState.getBoolean(PLAYER_2_SET);
-        name3Set = savedInstanceState.getBoolean(PLAYER_3_SET);
-        name4Set = savedInstanceState.getBoolean(PLAYER_4_SET);
-        totalPlayers = savedInstanceState.getInt(TOTAL_PLAYERS);
-        if (totalPlayers == 1)
-        player = savedInstanceState.getParcelable(PLAYER_1);
-        if (totalPlayers == 2)
-        player2 = savedInstanceState.getParcelable(PLAYER_2);
-        players = (ArrayList<Player>) savedInstanceState.getSerializable(PLAYERS);
-
-    }*/
 }

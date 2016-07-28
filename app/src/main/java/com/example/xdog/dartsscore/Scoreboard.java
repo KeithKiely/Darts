@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -31,6 +34,7 @@ public class Scoreboard extends AppCompatActivity {
             p2RoundWins,p3RoundWins, p4RoundWins;
     private TextView p1ScoreTV, p2ScoreTV, playerName, player2Name;
     private boolean roundOver = false;
+    private float x1, y1, x2, y2;
 
     /*static final String USER_ONE = "user1";
     static final String USER_TWO = "user2";
@@ -146,59 +150,11 @@ public class Scoreboard extends AppCompatActivity {
         intent.putExtra("currentPlayer", currentPlayer);
         startActivityForResult(intent, 1);
     }
-    /*
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can restore the view hierarchy
-        super.onRestoreInstanceState(savedInstanceState);
 
-        // Restore state members from saved instance
-        currentPlayer = savedInstanceState.getInt(CURRENT_PLAYER);
-        totalPlayers = savedInstanceState.getInt(TOTAL_PLAYERS);
-        numLegs = savedInstanceState.getInt(NUM_ROUNDS);
-        if (totalPlayers == 1) {
-            p1Scores = savedInstanceState.getIntegerArrayList(USER_ONE);
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
-            list1.setAdapter(listAdapter);
-            listAdapter.notifyDataSetChanged();
-        }
-        if (totalPlayers == 2) {
-            p1Scores = savedInstanceState.getIntegerArrayList(USER_ONE);
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
-            list1.setAdapter(listAdapter);
-            listAdapter.notifyDataSetChanged();
-            p2Scores = savedInstanceState.getIntegerArrayList(USER_TWO);
-            listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2Scores);
-            list2.setAdapter(listAdapter2);
-            listAdapter2.notifyDataSetChanged();
-        }
-        gameScore = savedInstanceState.getInt(ROUND_SCORE);
-        String p1ScoreTVTxt = ""+newPlayers.get(0).getScore();
-        String p2ScoreTVTxt = ""+newPlayers.get(1).getScore();
-        p1ScoreTV.setText(p1ScoreTVTxt);
-        p2ScoreTV.setText(p2ScoreTVTxt);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt(ROUND_SCORE,gameScore);
-        savedInstanceState.putInt(NUM_ROUNDS, numLegs);
-        savedInstanceState.putInt(CURRENT_PLAYER, currentPlayer);
-        savedInstanceState.putInt(TOTAL_PLAYERS, totalPlayers);
-        if (totalPlayers == 1) {
-            savedInstanceState.putSerializable(USER_ONE, p1Scores);
-        }
-        if (totalPlayers == 2) {
-            savedInstanceState.putSerializable(USER_TWO, p2Scores);
-        }
-
-        //Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
-    }
-    */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
+            boolean calcCancelled = false;
             int result = 0;
             if (resultCode == Activity.RESULT_OK) {
                 result = data.getIntExtra("score", 0);
@@ -206,71 +162,76 @@ public class Scoreboard extends AppCompatActivity {
                     p1Scores.add(result);
                     listAdapter.notifyDataSetChanged();
                     newPlayers.get(0).subtractScore(result);
-                    String p1Score = ""+newPlayers.get(0).getScore();
+                    String p1Score = "" + newPlayers.get(0).getScore();
                     p1ScoreTV.setText(p1Score);
                 }//End of player 1
-            } if (resultCode == Activity.RESULT_CANCELED) {
             }
-            if (currentPlayer == 2){
-                p2Scores.add(result);
-                listAdapter2.notifyDataSetChanged();
-                newPlayers.get(1).subtractScore(result);
-                String score = ""+newPlayers.get(1).getScore();
-                p2ScoreTV.setText(score);
-                String currentPlayer = " " +newPlayers.get(0).getPlayerName();
-                playerName.setText(currentPlayer);
-            }//End of player 2
-            for (int i = 0; i < newPlayers.size(); i++) {
-                ////////////////////////////////////////////
-                // Round Over
-                if (newPlayers.get(i).getScore() < 1){
-                    newPlayers.get(i).setScore(gameScore);
-                    numLegs--;
-                    roundOver = true;
-                    currentPlayer = 1;
-                    if (i == 0) {
-                        p1RoundWins++;
-                    }if (i == 1) {
-                        p2RoundWins++;
+            if (resultCode == Activity.RESULT_CANCELED) {
+                calcCancelled = true;
+            }
+            if (!calcCancelled) {
+                if (currentPlayer == 2) {
+                    p2Scores.add(result);
+                    listAdapter2.notifyDataSetChanged();
+                    newPlayers.get(1).subtractScore(result);
+                    String score = "" + newPlayers.get(1).getScore();
+                    p2ScoreTV.setText(score);
+                    String currentPlayer = " " + newPlayers.get(0).getPlayerName();
+                    playerName.setText(currentPlayer);
+                }//End of player 2
+                for (int i = 0; i < newPlayers.size(); i++) {
+                    ////////////////////////////////////////////
+                    // Round Over
+                    if (newPlayers.get(i).getScore() < 1) {
+                        newPlayers.get(i).setScore(gameScore);
+                        numLegs--;
+                        roundOver = true;
+                        currentPlayer = 1;
+                        if (i == 0) {
+                            p1RoundWins++;
+                        }
+                        if (i == 1) {
+                            p2RoundWins++;
+                        }
+                        String temp = gameScore + "";
+                        p1ScoreTV.setText(temp);
+                        p1Scores.clear();
+                        if (newPlayers.size() == 2) {
+                            p2ScoreTV.setText(temp);
+                            p2Scores.clear();
+                            listAdapter2.notifyDataSetChanged();
+                        }
+                        listAdapter.notifyDataSetChanged();
+                        Context context = getApplicationContext();
+                        CharSequence message = getResources().getString(R.string.round_over);
+                        //int duration = Toast.LENGTH_SHORT;
+                        final Toast toastBasic = Toast.makeText(context, message, Toast.LENGTH_LONG);
+                        toastBasic.show();
                     }
-                    String temp = gameScore+"";
-                    p1ScoreTV.setText(temp);
-                    p1Scores.clear();
-                    if (newPlayers.size() == 2) {
-                        p2ScoreTV.setText(temp);
-                        p2Scores.clear();
-                        listAdapter2.notifyDataSetChanged();
-                    }
-                    listAdapter.notifyDataSetChanged();
-                    Context context = getApplicationContext();
-                    CharSequence message = getResources().getString(R.string.round_over);
-                    //int duration = Toast.LENGTH_SHORT;
-                    final Toast toastBasic = Toast.makeText(context,message, Toast.LENGTH_LONG);
-                    toastBasic.show();
-                }
-                //////////////////////////////////////////////
-                // If game over
-                if ( numLegs <= 0) {
-                    bundle = new Bundle();
-                    bundle.putInt(P1_ROUND_WINS, p1RoundWins);
-                    bundle.putInt(P2_ROUND_WINS, p2RoundWins);
-                    bundle.putInt(NUM_ROUNDS, totalLegs);
-                    bundle.putString(PLAYER_NAME, newPlayers.get(currentPlayer -1).getPlayerName());
+                    //////////////////////////////////////////////
+                    // If game over
+                    if (numLegs <= 0) {
+                        bundle = new Bundle();
+                        bundle.putInt(P1_ROUND_WINS, p1RoundWins);
+                        bundle.putInt(P2_ROUND_WINS, p2RoundWins);
+                        bundle.putInt(NUM_ROUNDS, totalLegs);
+                        bundle.putString(PLAYER_NAME, newPlayers.get(currentPlayer - 1).getPlayerName());
 
-                    FragmentManager fm = getFragmentManager();
-                    GamerOverDialog dialogFragment = new GamerOverDialog ();
-                    dialogFragment.setArguments(bundle);
-                    dialogFragment.show(fm, "Game Over");
+                        FragmentManager fm = getFragmentManager();
+                        GamerOverDialog dialogFragment = new GamerOverDialog();
+                        dialogFragment.setArguments(bundle);
+                        dialogFragment.show(fm, "Game Over");
+                    }
                 }
-            }
-            if (roundOver){
-                currentPlayer = totalPlayers;
-                roundOver = false;
-            }
-            if(currentPlayer == totalPlayers) {
-                currentPlayer = 1;
-            } else {
-                currentPlayer++;
+                if (roundOver) {
+                    currentPlayer = totalPlayers;
+                    roundOver = false;
+                }
+                if (currentPlayer == totalPlayers) {
+                    currentPlayer = 1;
+                } else {
+                    currentPlayer++;
+                }
             }
         }
     }//onActivityResult
@@ -305,6 +266,65 @@ public class Scoreboard extends AppCompatActivity {
         FragmentManager fm = getFragmentManager();
         InfoFragment infoFragment = new InfoFragment ();
         infoFragment.setArguments(bundle);
-        infoFragment.show(fm, "Game Over");
+        infoFragment.show(fm, getResources().getString(R.string.game_over));
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent touchevent) {
+        int action = MotionEventCompat.getActionMasked(touchevent);
+
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                x1 = touchevent.getX();
+                y1 = touchevent.getY();
+                break;
+            case (MotionEvent.ACTION_MOVE):
+                return true;
+            case MotionEvent.ACTION_UP:
+                x2 = touchevent.getX();
+                y2 = touchevent.getY();
+
+                //if left to right sweep event on screen
+                if (x1 < x2) {
+                    Intent intent = new Intent(this, Calculator.class);
+                    intent.putExtra("name", newPlayers.get(currentPlayer -1).getPlayerName());
+                    intent.putExtra("currentPlayer", currentPlayer);
+                    startActivityForResult(intent, 1);
+                }
+
+                // if right to left sweep event on screen
+                if (x1 > x2) {
+                    bundle = new Bundle();
+                    bundle.putInt(P1_ROUND_WINS, p1RoundWins);
+                    bundle.putInt(P2_ROUND_WINS, p2RoundWins);
+                    bundle.putInt(NUM_ROUNDS, totalLegs);
+                    bundle.putInt(TOTAL_PLAYERS, totalPlayers);
+                    bundle.putString(PLAYER_1_NAME, newPlayers.get(0).getPlayerName());
+                    if (totalPlayers == 2)
+                        bundle.putString(PLAYER_2_NAME, newPlayers.get(1).getPlayerName());
+
+                    FragmentManager fm = getFragmentManager();
+                    InfoFragment infoFragment = new InfoFragment ();
+                    infoFragment.setArguments(bundle);
+                    infoFragment.show(fm, getResources().getString(R.string.game_over));
+                }
+
+                // if UP to Down sweep event on screen
+                if (y1 < y2) {
+                }
+
+                //if Down to UP sweep event on screen
+                if (y1 > y2) {
+                }
+                break;
+
+            case (MotionEvent.ACTION_CANCEL):
+                return true;
+            case (MotionEvent.ACTION_OUTSIDE):
+                return true;
+            default:
+                return super.onTouchEvent(touchevent);
+        }
+        return false;
     }
 }

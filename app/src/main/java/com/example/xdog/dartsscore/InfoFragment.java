@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -28,6 +29,7 @@ public class InfoFragment extends DialogFragment {
 
     // TODO: Rename and change types of parameters
     private String p1Name, p2Name, p1RoundWins, p2RoundWins, maxRounds;
+    private int totalPlayers;
     private TextView player1NameTV, player2NameTV, player1RoundsTV,
             player2RoundsTV, p1WinsTV, p2WinsTV,
             player1LostTV, player2LostTV;
@@ -61,14 +63,13 @@ public class InfoFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            int totalPlayers = getArguments().getInt(Scoreboard.TOTAL_PLAYERS);
+            totalPlayers = getArguments().getInt(Scoreboard.TOTAL_PLAYERS);
             p1Name = " " + getArguments().getString(Scoreboard.PLAYER_1_NAME);
             if (totalPlayers == 2)
             p2Name = " " + getArguments().getString(Scoreboard.PLAYER_2_NAME);
             Log.i("InfoFragment: ", "player one name (" + p1Name + ") player 2 (" + p2Name + ")");
             p1RoundWins = " " + getArguments().getInt(Scoreboard.P1_ROUND_WINS);
             maxRounds = " " + getArguments().getInt(Scoreboard.NUM_ROUNDS);
-
             p2Name = " " + getArguments().getString(Scoreboard.PLAYER_2_NAME);
             p2RoundWins = " " + getArguments().getInt(Scoreboard.P2_ROUND_WINS);
         }
@@ -78,26 +79,30 @@ public class InfoFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_info, container, false);
+        TableRow player2Row = (TableRow) rootView.findViewById(R.id.player2Row);
         player1NameTV = (TextView) rootView.findViewById(R.id.player1NameTV);
-        player2NameTV = (TextView) rootView.findViewById(R.id.player2NameTV);
         player1RoundsTV = (TextView) rootView.findViewById(R.id.player1RoundsTV);
-        player2RoundsTV = (TextView) rootView.findViewById(R.id.player2RoundsTV);
-
         p1WinsTV = (TextView) rootView.findViewById(R.id.playerWinsTV);
-        p2WinsTV = (TextView) rootView.findViewById(R.id.player2WinsTV);
         player1LostTV = (TextView) rootView.findViewById(R.id.player1LostTV);
-        player2LostTV = (TextView) rootView.findViewById(R.id.player2LostTV);
-
         player1NameTV.setText(p1Name);
-        player2NameTV.setText(p2Name);
-
         player1RoundsTV.setText(maxRounds);
-        player2RoundsTV.setText(maxRounds);
-
         p1WinsTV.setText(p1RoundWins);
-        p2WinsTV.setText(p2RoundWins);
         player1LostTV.setText(p2RoundWins);
-        player2LostTV.setText(p1RoundWins);
+        if (totalPlayers == 1) {
+            player2Row.setVisibility(View.INVISIBLE);
+        }
+        if (totalPlayers == 2) {
+            player2NameTV = (TextView) rootView.findViewById(R.id.player2NameTV);
+            player2LostTV = (TextView) rootView.findViewById(R.id.player2LostTV);
+            player2RoundsTV = (TextView) rootView.findViewById(R.id.player2RoundsTV);
+            p2WinsTV = (TextView) rootView.findViewById(R.id.player2WinsTV);
+            player2NameTV.setText(p2Name);
+            player2RoundsTV.setText(maxRounds);
+            p2WinsTV.setText(p2RoundWins);
+            player2LostTV.setText(p1RoundWins);
+        }
+
+
         // Inflate the layout for this fragment
         getDialog().setTitle(getResources().getString(R.string.current_score));
         return rootView;
