@@ -52,6 +52,8 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         setContentView(R.layout.activity_game_setting);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         players = new ArrayList<>();
         name1Set = true;
         name2Set = false;
@@ -92,7 +94,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         numPlayer4B.setEnabled(false);
         numPlayer4B.setVisibility(View.INVISIBLE);
         numPlayer3B.setVisibility(View.INVISIBLE);
-
     }
 
     public void startGame(View view) {

@@ -2,7 +2,6 @@ package com.example.xdog.dartsscore;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public class GamerOverDialog extends DialogFragment {
         rWins = (TextView) rootView.findViewById(R.id.numWinTV);
         rLose = (TextView) rootView.findViewById(R.id.numLoseTV);
         rounds = (TextView) rootView.findViewById(R.id.numRoundsTV);
-        name = (TextView) rootView.findViewById(R.id.playerNameTV);
+        name = (TextView) rootView.findViewById(R.id.playerNameHeadingTV);
 
         String roundWins = ""+ Scoreboard.bundle.getInt(Scoreboard.P1_ROUND_WINS);
         String roundLose = ""+ Scoreboard.bundle.getInt(Scoreboard.P2_ROUND_WINS);

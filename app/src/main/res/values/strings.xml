@@ -57,4 +57,16 @@
     <string name="rounds">Rounds</string>
     <string name="round_wins">Wins</string>
     <string name="rounds_lost">Lost</string>
+    <string name="darts">Darts</string>
+    <string name="mult_1">* 1</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="mult_2">* 2</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="mult_3">* 3</string>
+    <string name="clear">Clear</string>
+    <string name="simple_ime">Simple IME</string>
+    <string name="subtype_en_US">English (US)</string>
 </resources>

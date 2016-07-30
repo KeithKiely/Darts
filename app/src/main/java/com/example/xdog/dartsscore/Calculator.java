@@ -2,11 +2,11 @@ package com.example.xdog.dartsscore;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -16,20 +16,27 @@ import android.widget.Toast;
 public class Calculator extends AppCompatActivity {
     private EditText dart1, dart2, dart3;
     private TextView player;
-    private RadioGroup group1, group2, group3;
+    private RadioGroup group1, group2, group3, row1, row2, row3, row0;
     private final int bull = 50;
     private final int _25 = 25;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calculator);
+        setContentView(R.layout.calculator_layout);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        if (myToolbar != null) {
+            Log.i("Calculator ", " is not null");
+            setSupportActionBar(myToolbar);
+            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        }
+        //setContentView(R.layout.calculator_layout);
         dart1 = (EditText) findViewById(R.id.dartOneTF);
         dart2 = (EditText) findViewById(R.id.dartTwoTF);
         dart3 = (EditText) findViewById(R.id.dartThreeTF);
 
-        player = (TextView) findViewById(R.id.playerNameTV);
-        player.setText(getIntent().getStringExtra("name"));
+        player = (TextView) findViewById(R.id.playerNameHeadingTV);
+       // player.setText(getIntent().getStringExtra("name"));
         group1 = (RadioGroup) findViewById(R.id.radioGroup1);
         group2 = (RadioGroup) findViewById(R.id.radioGroup2);
         group3 = (RadioGroup) findViewById(R.id.radioGroup3);

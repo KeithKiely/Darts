@@ -145,7 +145,7 @@ public class Scoreboard extends AppCompatActivity {
     }
 
     public void openCalc(View view) {
-        Intent intent = new Intent(this, Calculator.class);
+        Intent intent = new Intent(this, Calculator2.class);
         intent.putExtra("name", newPlayers.get(currentPlayer -1).getPlayerName());
         intent.putExtra("currentPlayer", currentPlayer);
         startActivityForResult(intent, 1);
