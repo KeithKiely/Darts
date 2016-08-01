@@ -69,4 +69,9 @@
     <string name="clear">Clear</string>
     <string name="simple_ime">Simple IME</string>
     <string name="subtype_en_US">English (US)</string>
+    <string name="dart_one">Dart One</string>
+    <string name="dart_two">Dart Two</string>
+    <string name="dart_three">Dart Three</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>

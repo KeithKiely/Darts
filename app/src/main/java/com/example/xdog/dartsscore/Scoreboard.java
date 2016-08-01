@@ -161,6 +161,7 @@ public class Scoreboard extends AppCompatActivity {
                 if (currentPlayer == 1) {
                     p1Scores.add(result);
                     listAdapter.notifyDataSetChanged();
+                    list1.setSelection(listAdapter.getCount() - 1);
                     newPlayers.get(0).subtractScore(result);
                     String p1Score = "" + newPlayers.get(0).getScore();
                     p1ScoreTV.setText(p1Score);
@@ -173,6 +174,7 @@ public class Scoreboard extends AppCompatActivity {
                 if (currentPlayer == 2) {
                     p2Scores.add(result);
                     listAdapter2.notifyDataSetChanged();
+                    list2.setSelection(listAdapter2.getCount() - 1);
                     newPlayers.get(1).subtractScore(result);
                     String score = "" + newPlayers.get(1).getScore();
                     p2ScoreTV.setText(score);
@@ -286,7 +288,7 @@ public class Scoreboard extends AppCompatActivity {
 
                 //if left to right sweep event on screen
                 if (x1 < x2) {
-                    Intent intent = new Intent(this, Calculator.class);
+                    Intent intent = new Intent(this, Calculator2.class);
                     intent.putExtra("name", newPlayers.get(currentPlayer -1).getPlayerName());
                     intent.putExtra("currentPlayer", currentPlayer);
                     startActivityForResult(intent, 1);
@@ -307,14 +309,6 @@ public class Scoreboard extends AppCompatActivity {
                     InfoFragment infoFragment = new InfoFragment ();
                     infoFragment.setArguments(bundle);
                     infoFragment.show(fm, getResources().getString(R.string.game_over));
-                }
-
-                // if UP to Down sweep event on screen
-                if (y1 < y2) {
-                }
-
-                //if Down to UP sweep event on screen
-                if (y1 > y2) {
                 }
                 break;
 

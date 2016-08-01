@@ -15,18 +15,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * Created by Jimena on 29/07/2016.
+ * Created by Keith on 29/07/2016.
+ * Calculates 3 dart score
  */
 public class Calculator2 extends AppCompatActivity implements View.OnFocusChangeListener {
     private EditText dart1ET, dart2ET, dart3ET;
     private Button bOne, bTwo,bThree, bFour, bFive, bSix,
-            bSeven, bEight, bNine, bZero, clearButton, doneButton;
+            bSeven, bEight, bNine, bZero;
     private boolean editText1Selected = true;
     private boolean editText2Selected = false;
     private boolean editText3Selected = false;
     private int d1Mem, d2Mem, d3Mem, dart1Num,dart2Num,dart3Num;
-    private final int bull = 50;
-    private final int _25 = 25;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,8 +82,6 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
         bEight = (Button) findViewById(R.id.bEight);
         bZero = (Button) findViewById(R.id.bZero);
         bNine = (Button) findViewById(R.id.bNine);
-        clearButton = (Button) findViewById(R.id.clearButton);
-        doneButton = (Button) findViewById(R.id.doneButton);
     }
 
     public void clear(View view) {
@@ -232,12 +229,12 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
                 dart1ET.setText(temp);
             }
         }if (editText2Selected) {
-            String temp = dart1ET.getText().toString().trim() + bEight.getText().toString();
+            String temp = dart2ET.getText().toString().trim() + bEight.getText().toString();
             if (validInput(Integer.parseInt(temp))) {
                 dart2ET.setText(temp);
             }
         }if (editText3Selected) {
-            String temp = dart1ET.getText().toString().trim() + bEight.getText().toString();
+            String temp = dart3ET.getText().toString().trim() + bEight.getText().toString();
             if (validInput(Integer.parseInt(temp))) {
                 dart3ET.setText(temp);
             }
@@ -281,18 +278,20 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
     }
 
     public void mult1(View view){
-
         if (editText1Selected && !dart1ET.getText().toString().equals("")) {
             String temp = ""+d1Mem;
             dart1ET.setText(temp);
+            dart1Num = d1Mem;
         }
         if (editText2Selected && !dart2ET.getText().toString().equals("")) {
             String temp = ""+d2Mem;
             dart2ET.setText(temp);
+            dart2Num = d1Mem;
         }
         if (editText3Selected && !dart3ET.getText().toString().equals("")) {
             String temp = ""+d3Mem;
             dart3ET.setText(temp);
+            dart3Num = d1Mem;
         }
     }
 
@@ -363,8 +362,10 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
     }
 
     public boolean validInput(int dart) {
-        Context context, context1;
-        if ((dart >= 0 && dart <= 20 || dart == _25 || dart == bull )) {
+        Context context;
+        int bull = 50;
+        int _25 = 25;
+        if ((dart >= 0 && dart <= 20 || dart == _25 || dart == bull)) {
             return true;
         } else {
             context = getApplicationContext();
@@ -373,6 +374,43 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
             final Toast toastBasic = Toast.makeText(context,message, Toast.LENGTH_SHORT);
             toastBasic.show();
             return false;
+        }
+    }
+
+    public void nextET(View view) {
+        if (editText1Selected) {
+            dart2ET.requestFocus();
+            editText1Selected = false;
+            editText2Selected = true;
+            editText3Selected = false;
+        } else if (editText2Selected) {
+            dart3ET.requestFocus();
+            editText1Selected = false;
+            editText2Selected = false;
+            editText3Selected = true;
+        } else if (editText3Selected) {
+            dart1ET.requestFocus();
+            editText1Selected = true;
+            editText2Selected = false;
+            editText3Selected = false;
+        }
+    }
+    public void previousET(View view) {
+        if (editText1Selected) {
+            dart3ET.requestFocus();
+            editText1Selected = false;
+            editText2Selected = false;
+            editText3Selected = true;
+        } else if (editText2Selected) {
+            dart1ET.requestFocus();
+            editText1Selected = true;
+            editText2Selected = false;
+            editText3Selected = false;
+        } else if (editText3Selected) {
+            dart2ET.requestFocus();
+            editText1Selected = false;
+            editText2Selected = true;
+            editText3Selected = false;
         }
     }
 
@@ -388,6 +426,12 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
             toastBasic.show();
         } else {
             Intent intent = new Intent(this, Scoreboard.class);
+            if (!dart1ET.getText().toString().equals("") && !dart2ET.getText().toString().equals("")
+                    && !dart3ET.getText().toString().equals("")) {
+                dart1Num = Integer.parseInt(dart1ET.getText().toString());
+                dart2Num = Integer.parseInt(dart2ET.getText().toString());
+                dart3Num = Integer.parseInt(dart3ET.getText().toString());
+            }
             if (dart1Num + dart2Num + dart3Num != -1) {
                 int totalValue = dart1Num + dart2Num + dart3Num;
                 intent.putExtra("score", totalValue);

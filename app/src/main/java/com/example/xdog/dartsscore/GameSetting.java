@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -20,31 +19,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class GameSetting extends AppCompatActivity implements OnSeekBarChangeListener{
-    private RadioGroup matchScoreGr, numPlayersGr;
+    private RadioGroup matchScoreGr;
     private EditText name1, name2, name3, name4;
     private TextView leg;
-    private RadioButton _501, _301, _101;
-    private SeekBar numLegs;
     private Button numPlayer1B, numPlayer2B, numPlayer3B, numPlayer4B;
 
     private boolean name1Set, name2Set, name3Set, name4Set;
-    private int gameScore, legs, totalPlayers;
+    private int gameScore;
+    private int legs;
 
-    private Player player, player1,player2,player3;
     private ArrayList<Player> players;
 
     public static final String NUMBER_OF_LEGS = "numLegs";
-    /*final String SCORE = "score";
-    final String TOTAL_PLAYERS = "total_players";
-    final String PLAYER_1_SET = "player1Set";
-    final String PLAYER_2_SET = "player2Set";
-    final String PLAYER_3_SET = "player3Set";
-    final String PLAYER_4_SET = "player4Set";
-    final String PLAYER_1 = "player1";
-    final String PLAYER_2 = "player2";
-    final String PLAYER_3 = "player3";
-    final String PLAYER_4 = "player4";
-    final String PLAYERS = "players";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +47,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
         name4Set = false;
 
         matchScoreGr = (RadioGroup) findViewById(R.id.gameType);
-        numPlayersGr = (RadioGroup) findViewById(R.id.numPlayerGroup);
-
-        _501 = (RadioButton) findViewById(R.id.radioB501);
-        _301 = (RadioButton) findViewById(R.id.radioB301);
-        _101 = (RadioButton) findViewById(R.id.radioB101);
 
         name1 = (EditText) findViewById(R.id.name1ET);
         name2 = (EditText) findViewById(R.id.name2ET);
@@ -80,8 +61,10 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
         leg = (TextView) findViewById(R.id.legsTV);
 
-        numLegs = (SeekBar) findViewById(R.id.seekBar);
-        numLegs.setOnSeekBarChangeListener(this);
+        SeekBar numLegs = (SeekBar) findViewById(R.id.seekBar);
+        if (numLegs != null) {
+            numLegs.setOnSeekBarChangeListener(this);
+        }
 
         numPlayer1B = (Button) findViewById(R.id.numPlayer1);
         numPlayer2B = (Button) findViewById(R.id.numPlayer2);
@@ -109,6 +92,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
                 gameScore = 501;
                 break;
         }
+        Player player;
         if (name1Set) {
             String nameOne = name1.getText().toString().trim();
             if (nameOne.equals("")) {
@@ -126,7 +110,7 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
                 nameTwo = "Player 2";
             }
             player = new Player(nameOne, gameScore, 1);
-            player1 = new Player(nameTwo, gameScore, 2);
+            Player player1 = new Player(nameTwo, gameScore, 2);
             players.add(player);
             players.add(player1);
         }
@@ -151,7 +135,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
             intent.putExtra(NUMBER_OF_LEGS, legs);
             startActivity(intent);
         }
-        totalPlayers = players.size();
     }
 
     public void set1Players (View view) {
