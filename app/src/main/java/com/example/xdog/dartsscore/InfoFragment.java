@@ -28,8 +28,8 @@ public class InfoFragment extends DialogFragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String p1Name, p2Name, p1RoundWins, p2RoundWins, maxRounds;
-    private int totalPlayers;
+    private String p1Name, p2Name, maxRounds;
+    private int totalPlayers, p1RoundWins, p2RoundWins,currentRound;
     private TextView player1NameTV, player2NameTV, player1RoundsTV,
             player2RoundsTV, p1WinsTV, p2WinsTV,
             player1LostTV, player2LostTV;
@@ -68,10 +68,11 @@ public class InfoFragment extends DialogFragment {
             if (totalPlayers == 2)
             p2Name = " " + getArguments().getString(Scoreboard.PLAYER_2_NAME);
             Log.i("InfoFragment: ", "player one name (" + p1Name + ") player 2 (" + p2Name + ")");
-            p1RoundWins = " " + getArguments().getInt(Scoreboard.P1_ROUND_WINS);
+            p1RoundWins = getArguments().getInt(Scoreboard.P1_ROUND_WINS);
             maxRounds = " " + getArguments().getInt(Scoreboard.NUM_ROUNDS);
             p2Name = " " + getArguments().getString(Scoreboard.PLAYER_2_NAME);
-            p2RoundWins = " " + getArguments().getInt(Scoreboard.P2_ROUND_WINS);
+            p2RoundWins = getArguments().getInt(Scoreboard.P2_ROUND_WINS);
+            currentRound = getArguments().getInt(Scoreboard.CURRENT_ROUND);
         }
     }
 
@@ -84,10 +85,13 @@ public class InfoFragment extends DialogFragment {
         player1RoundsTV = (TextView) rootView.findViewById(R.id.player1RoundsTV);
         p1WinsTV = (TextView) rootView.findViewById(R.id.playerWinsTV);
         player1LostTV = (TextView) rootView.findViewById(R.id.player1LostTV);
+        String p1wins = p1RoundWins + "";
+        String p2Wins = p2RoundWins + "";
+        String currentRoundSt = currentRound +"/" + maxRounds;
         player1NameTV.setText(p1Name);
-        player1RoundsTV.setText(maxRounds);
-        p1WinsTV.setText(p1RoundWins);
-        player1LostTV.setText(p2RoundWins);
+        player1RoundsTV.setText(currentRoundSt);
+        p1WinsTV.setText(p1wins);
+        player1LostTV.setText(p2Wins);
         if (totalPlayers == 1) {
             player2Row.setVisibility(View.INVISIBLE);
         }
@@ -96,10 +100,11 @@ public class InfoFragment extends DialogFragment {
             player2LostTV = (TextView) rootView.findViewById(R.id.player2LostTV);
             player2RoundsTV = (TextView) rootView.findViewById(R.id.player2RoundsTV);
             p2WinsTV = (TextView) rootView.findViewById(R.id.player2WinsTV);
+            String tempP2Wins = p2RoundWins + "";
             player2NameTV.setText(p2Name);
-            player2RoundsTV.setText(maxRounds);
-            p2WinsTV.setText(p2RoundWins);
-            player2LostTV.setText(p1RoundWins);
+            player2RoundsTV.setText(currentRoundSt);
+            p2WinsTV.setText(tempP2Wins);
+            player2LostTV.setText(p1wins);
         }
 
 

@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.example.xdog.dartsscore.InfoFragment">
+    tools:context="com.example.xdog.dartsscore.InfoFragment"
+    android:padding="8dp">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -20,44 +21,51 @@
             android:id="@+id/tableHeadingsRow">
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/players"
                 android:id="@+id/playersTV"
+                android:textSize="18sp"
+                android:layout_weight="0.25"
+                android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="20sp"
-                android:layout_marginBottom="8dp"
-                android:layout_gravity="center" />
+                android:layout_marginBottom="8dp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/rounds"
                 android:id="@+id/roundsTV"
+                android:textSize="18sp"
+                android:layout_weight="0.25"
+                android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="20sp"
                 android:layout_marginBottom="8dp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/round_wins"
                 android:id="@+id/roundsWonTV"
+                android:textSize="18sp"
+                android:layout_weight="0.25"
+                android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="20sp"
                 android:layout_marginBottom="8dp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/rounds_lost"
                 android:id="@+id/roundsLostTV"
+                android:textSize="18sp"
+                android:layout_weight="0.25"
+                android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="20sp"
                 android:layout_marginBottom="8dp" />
         </TableRow>
 
@@ -68,44 +76,52 @@
             android:id="@+id/playerOneRow">
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player1NameTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player1RoundsTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/playerWinsTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player1LostTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
         </TableRow>
 
         <TableRow
@@ -115,44 +131,52 @@
             android:id="@+id/player2Row" >
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player2NameTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player2RoundsTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player2WinsTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
 
             <TextView
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/player2LostTV"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.25"
+                android:textSize="16sp" />
         </TableRow>
     </TableLayout>
 
