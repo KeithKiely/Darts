@@ -9,4 +9,8 @@
 
     </style>
 
+    <style name="myTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/primary_material_light_1</item>
+    </style>
+
 </resources>

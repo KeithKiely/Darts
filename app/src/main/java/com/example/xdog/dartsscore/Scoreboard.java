@@ -12,6 +12,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,12 +42,6 @@ public class Scoreboard extends AppCompatActivity {
     private boolean roundOver = false;
     private float x1, y1, x2, y2;
     private ColorStateList oldColors;
-
-    /*static final String USER_ONE = "user1";
-    static final String USER_TWO = "user2";
-    static final String CURRENT_PLAYER = "currentPlayer";
-
-    static final String ROUND_SCORE = "user1Score";*/
     static final String TOTAL_PLAYERS = "totalPlayers";
     static final String P1_ROUND_WINS = "user1RWins";
     static final String P2_ROUND_WINS = "user2RWins";
@@ -70,7 +65,10 @@ public class Scoreboard extends AppCompatActivity {
         setContentView(R.layout.activity_scoreboard);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
+        if (myToolbar != null) {
+            setSupportActionBar(myToolbar);
+            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        }
         currentRound = 1;
         p1RoundWins =0;
         p2RoundWins =0;
@@ -84,7 +82,9 @@ public class Scoreboard extends AppCompatActivity {
         list2 = (ListView) findViewById(R.id.listView2);
 
         playerName = (TextView) findViewById((R.id.nameTV));
-        oldColors = playerName.getTextColors();
+        if (playerName != null) {
+            oldColors = playerName.getTextColors();
+        }
         currentScoreP1 = (TextView) findViewById((R.id.currentScoreP1));
         currentScoreP2 = (TextView) findViewById((R.id.currentScoreP2));
 
@@ -128,7 +128,7 @@ public class Scoreboard extends AppCompatActivity {
             p2Scores.add(newPlayers.get(1).getScore());
 
             listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
-            listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2Scores);
+            listAdapter2 = new ArrayAdapter<>(this,R.layout.list_text_layout,p2Scores);
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
         }
@@ -141,7 +141,7 @@ public class Scoreboard extends AppCompatActivity {
             p2Scores.add(newPlayers.get(1).getScore());
 
             listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
-            listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2Scores);
+            listAdapter2 = new ArrayAdapter<>(this,R.layout.list_text_layout,p2Scores);
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
         }
@@ -186,7 +186,11 @@ public class Scoreboard extends AppCompatActivity {
         }
         if (currentPlayer == 1) {
             playerName.setTextColor(oldColors);
-            player2Name.setTextColor(Color.parseColor("#FF0000"));
+            if (totalPlayers == 2) {
+                player2Name.setTextColor(Color.parseColor("#308070"));
+            } if (totalPlayers == 1){
+                playerName.setTextColor(Color.parseColor("#308070"));
+            }
             p1Scores.add(result);
             int currentScore = 0;
             for (int i = 1; i < p1Scores.size(); i++) {
@@ -201,7 +205,7 @@ public class Scoreboard extends AppCompatActivity {
             newPlayers.get(0).subtractScore(result);
         }//End of player 1
         if (currentPlayer == 2) {
-            playerName.setTextColor(Color.parseColor("#FF0000"));
+            playerName.setTextColor(Color.parseColor("#308070"));
             player2Name.setTextColor(oldColors);
             p2Scores.add(result);
             int currentScore = 0;
@@ -246,6 +250,9 @@ public class Scoreboard extends AppCompatActivity {
                     p2Scores.add(gameScore);
                     listAdapter2.notifyDataSetChanged();
                 }
+                player2Name.setTextColor(oldColors);
+                playerName.setTextColor(Color.parseColor("#308070"));
+
                 listAdapter.notifyDataSetChanged();
                 Context context = getApplicationContext();
                 CharSequence message = getResources().getString(R.string.round_over);
@@ -260,7 +267,11 @@ public class Scoreboard extends AppCompatActivity {
                 bundle.putInt(P1_ROUND_WINS, p1RoundWins);
                 bundle.putInt(P2_ROUND_WINS, p2RoundWins);
                 bundle.putInt(NUM_ROUNDS, totalLegs);
-                bundle.putString(PLAYER_NAME, newPlayers.get(currentPlayer - 1).getPlayerName());
+                Log.i("Scoreboard ", " current player" + currentPlayer);
+                if (currentPlayer == 1)
+                    bundle.putString(PLAYER_NAME, newPlayers.get(0).getPlayerName());
+                if (currentPlayer == 2)
+                    bundle.putString(PLAYER_NAME, newPlayers.get(1).getPlayerName());
 
                 FragmentManager fm = getFragmentManager();
                 GamerOverDialog dialogFragment = new GamerOverDialog();
@@ -286,12 +297,13 @@ public class Scoreboard extends AppCompatActivity {
             boolean calcCancelled = false;
             if (resultCode == Activity.RESULT_OK) {
                 calcResult = data.getIntExtra("score", 0);
-                scoreManagement(true);
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 calcCancelled = true;
             }
             if (!calcCancelled) {
+                scoreManagement(true);
                 roundManagement();
             }
         }
@@ -315,7 +327,7 @@ public class Scoreboard extends AppCompatActivity {
     }
 
     public void openInfo(View view) {
-        bundle = new Bundle();
+        /*bundle = new Bundle();
         bundle.putInt(P1_ROUND_WINS, p1RoundWins);
         bundle.putInt(P2_ROUND_WINS, p2RoundWins);
         bundle.putInt(NUM_ROUNDS, totalLegs);
@@ -323,12 +335,12 @@ public class Scoreboard extends AppCompatActivity {
         bundle.putInt(CURRENT_ROUND, currentRound);
         bundle.putString(PLAYER_1_NAME, newPlayers.get(0).getPlayerName());
         if (totalPlayers == 2)
-        bundle.putString(PLAYER_2_NAME, newPlayers.get(1).getPlayerName());
+        bundle.putString(PLAYER_2_NAME, newPlayers.get(1).getPlayerName());*/
 
         FragmentManager fm = getFragmentManager();
-        InfoFragment infoFragment = new InfoFragment ();
-        infoFragment.setArguments(bundle);
-        infoFragment.show(fm, getResources().getString(R.string.game_over));
+        UsageFragment usageFragment = new UsageFragment();
+        //usageFragment.setArguments(bundle);
+        usageFragment.show(fm, getResources().getString(R.string.how_to));
     }
 
     @Override

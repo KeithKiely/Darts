@@ -51,10 +51,10 @@
     <string name="no_empty_fields">Fields cannot be left empty</string>
     <string name="are_you_ready_to_close_game">Are you sure you want to end the game?</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="information">i</string>
     <string name="rounds">Round</string>
+    <string name="how_to">How to</string>
     <string name="round_wins">Wins</string>
     <string name="rounds_lost">Lost</string>
     <string name="darts">Darts</string>
@@ -74,4 +74,11 @@
     <string name="dart_three">Dart Three</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="left_swipe">Left Swipe:</string>
+    <string name="right_swipe">Right Swipe:</string>
+    <string name="calculator_info">Opens calculator.</string>
+    <string name="round_information_info">Displays round information.</string>
+    <string name="app_usage">App Usage</string>
+    <string name="calculator_usage_info">Pressing calculate whilst Input field is empty opens the calculator.</string>
+    <string name="other_info">Other Info:</string>
 </resources>

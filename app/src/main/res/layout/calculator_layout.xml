@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Calculator">
+    tools:context=".Calculator2">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -26,21 +26,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/darts"
-        android:id="@+id/dartsHeading"
+        android:id="@+id/dartsHeadingTV"
         android:gravity="center"
-        android:textSize="26sp"
+        android:textSize="20sp"
         android:layout_marginTop="58dp"
         android:layout_below="@+id/my_toolbar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic"
+        android:textColor="#308070" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout7"
-        android:layout_below="@+id/dartsHeading"
+        android:layout_below="@+id/dartsHeadingTV"
         android:layout_alignParentLeft="true">
 
         <LinearLayout
@@ -56,7 +57,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight=".3"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginTop="4dp" />
 
             <EditText
@@ -79,7 +80,7 @@
                 android:id="@+id/dart2"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_weight=".3"
                 android:layout_marginTop="4dp" />
 
@@ -104,7 +105,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="0.23"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginTop="4dp" />
 
             <EditText
@@ -133,7 +134,9 @@
             android:text="@string/_1"
             android:id="@+id/bOne"
             android:layout_weight="0.25"
-            android:onClick="bOne" />
+            android:onClick="bOne"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -142,7 +145,9 @@
             android:text="@string/_2"
             android:id="@+id/bTwo"
             android:layout_weight="0.25"
-            android:onClick="bTwo" />
+            android:onClick="bTwo"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -151,7 +156,9 @@
             android:text="@string/_3"
             android:id="@+id/bThree"
             android:layout_weight="0.25"
-            android:onClick="bThree" />
+            android:onClick="bThree"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -160,7 +167,9 @@
             android:text="@string/mult_1"
             android:id="@+id/by1"
             android:layout_weight="0.25"
-            android:onClick="mult1" />
+            android:onClick="mult1"
+            android:textSize="18sp"
+            android:textColor="#308070" />
     </LinearLayout>
 
     <LinearLayout
@@ -179,7 +188,9 @@
             android:text="@string/_4"
             android:id="@+id/bFour"
             android:layout_weight="0.25"
-            android:onClick="bFour" />
+            android:onClick="bFour"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -188,7 +199,9 @@
             android:text="@string/_5"
             android:id="@+id/bFive"
             android:layout_weight="0.25"
-            android:onClick="bFive" />
+            android:onClick="bFive"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -197,7 +210,9 @@
             android:text="@string/_6"
             android:id="@+id/bSix"
             android:layout_weight="0.25"
-            android:onClick="bSix" />
+            android:onClick="bSix"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -206,7 +221,9 @@
             android:text="@string/mult_2"
             android:id="@+id/mult_2"
             android:layout_weight="0.25"
-            android:onClick="mult2" />
+            android:onClick="mult2"
+            android:textSize="18sp"
+            android:textColor="#308070" />
     </LinearLayout>
 
     <LinearLayout
@@ -225,7 +242,9 @@
             android:text="@string/_7"
             android:id="@+id/bSeven"
             android:layout_weight="0.25"
-            android:onClick="bSeven" />
+            android:onClick="bSeven"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -234,7 +253,9 @@
             android:text="@string/_8"
             android:id="@+id/bEight"
             android:layout_weight="0.25"
-            android:onClick="bEight" />
+            android:onClick="bEight"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -243,7 +264,9 @@
             android:text="@string/_9"
             android:id="@+id/bNine"
             android:layout_weight="0.25"
-            android:onClick="bNine" />
+            android:onClick="bNine"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -252,7 +275,9 @@
             android:text="@string/mult_3"
             android:id="@+id/mult_3"
             android:layout_weight="0.25"
-            android:onClick="mult3" />
+            android:onClick="mult3"
+            android:textSize="18sp"
+            android:textColor="#308070" />
     </LinearLayout>
 
     <LinearLayout
@@ -271,7 +296,9 @@
             android:text="@string/clear"
             android:id="@+id/clearButton"
             android:layout_weight="0.33"
-            android:onClick="clear" />
+            android:onClick="clear"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -280,7 +307,9 @@
             android:text="@string/_0"
             android:id="@+id/bZero"
             android:layout_weight="0.33"
-            android:onClick="bZero" />
+            android:onClick="bZero"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -289,7 +318,9 @@
             android:text="@string/done"
             android:id="@+id/doneButton"
             android:layout_weight="0.33"
-            android:onClick="done" />
+            android:onClick="done"
+            android:textSize="18sp"
+            android:textColor="#308070" />
     </LinearLayout>
 
     <LinearLayout
@@ -306,7 +337,9 @@
             android:text="@string/previous"
             android:id="@+id/previousET"
             android:layout_weight="0.5"
-            android:onClick="previousET" />
+            android:onClick="previousET"
+            android:textSize="18sp"
+            android:textColor="#308070" />
 
         <Button
             android:layout_width="wrap_content"
@@ -314,7 +347,9 @@
             android:text="@string/next"
             android:id="@+id/nextET"
             android:layout_weight="0.5"
-            android:onClick="nextET" />
+            android:onClick="nextET"
+            android:textSize="18sp"
+            android:textColor="#308070" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,10 +1,7 @@
 package com.example.xdog.dartsscore;
 
 import android.app.DialogFragment;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,52 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link InfoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link InfoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class InfoFragment extends DialogFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String p1Name, p2Name, maxRounds;
     private int totalPlayers, p1RoundWins, p2RoundWins,currentRound;
-    private TextView player1NameTV, player2NameTV, player1RoundsTV,
-            player2RoundsTV, p1WinsTV, p2WinsTV,
-            player1LostTV, player2LostTV;
-
-    private OnFragmentInteractionListener mListener;
 
     public InfoFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InfoFragment newInstance(String param1, String param2) {
-        InfoFragment fragment = new InfoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,15 +37,15 @@ public class InfoFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_info, container, false);
+        View rootView = inflater.inflate(R.layout.info_fragment, container, false);
         TableRow player2Row = (TableRow) rootView.findViewById(R.id.player2Row);
-        player1NameTV = (TextView) rootView.findViewById(R.id.player1NameTV);
-        player1RoundsTV = (TextView) rootView.findViewById(R.id.player1RoundsTV);
-        p1WinsTV = (TextView) rootView.findViewById(R.id.playerWinsTV);
-        player1LostTV = (TextView) rootView.findViewById(R.id.player1LostTV);
+        TextView player1NameTV = (TextView) rootView.findViewById(R.id.player1NameTV);
+        TextView player1RoundsTV = (TextView) rootView.findViewById(R.id.player1RoundsTV);
+        TextView p1WinsTV = (TextView) rootView.findViewById(R.id.playerWinsTV);
+        TextView player1LostTV = (TextView) rootView.findViewById(R.id.player1LostTV);
         String p1wins = p1RoundWins + "";
         String p2Wins = p2RoundWins + "";
-        String currentRoundSt = currentRound +"/" + maxRounds;
+        String currentRoundSt = currentRound +" /" + maxRounds;
         player1NameTV.setText(p1Name);
         player1RoundsTV.setText(currentRoundSt);
         p1WinsTV.setText(p1wins);
@@ -96,10 +54,10 @@ public class InfoFragment extends DialogFragment {
             player2Row.setVisibility(View.INVISIBLE);
         }
         if (totalPlayers == 2) {
-            player2NameTV = (TextView) rootView.findViewById(R.id.player2NameTV);
-            player2LostTV = (TextView) rootView.findViewById(R.id.player2LostTV);
-            player2RoundsTV = (TextView) rootView.findViewById(R.id.player2RoundsTV);
-            p2WinsTV = (TextView) rootView.findViewById(R.id.player2WinsTV);
+            TextView player2NameTV = (TextView) rootView.findViewById(R.id.player2NameTV);
+            TextView player2LostTV = (TextView) rootView.findViewById(R.id.player2LostTV);
+            TextView player2RoundsTV = (TextView) rootView.findViewById(R.id.player2RoundsTV);
+            TextView p2WinsTV = (TextView) rootView.findViewById(R.id.player2WinsTV);
             String tempP2Wins = p2RoundWins + "";
             player2NameTV.setText(p2Name);
             player2RoundsTV.setText(currentRoundSt);
@@ -107,48 +65,8 @@ public class InfoFragment extends DialogFragment {
             player2LostTV.setText(p1wins);
         }
 
-
         // Inflate the layout for this fragment
         getDialog().setTitle(getResources().getString(R.string.current_score));
         return rootView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

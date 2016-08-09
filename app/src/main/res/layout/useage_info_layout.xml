@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.xdog.dartsscore.InfoFragment"
+    android:padding="8dp"
+    android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_usage"
+            android:id="@+id/calcUsageTV"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            android:layout_marginBottom="10dp"
+            android:textColor="#308070" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/left_swipe"
+            android:id="@+id/info1TV"
+            android:textSize="18sp"
+            android:layout_marginTop="6dp"
+            android:textColor="#308070"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/round_information_info"
+            android:id="@+id/textView6"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/right_swipe"
+            android:id="@+id/rightSwipeTV"
+            android:textSize="18sp"
+            android:layout_marginTop="6dp"
+            android:textColor="#308070"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calculator_info"
+            android:id="@+id/textView7"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other_info"
+            android:id="@+id/textView8"
+            android:textColor="#308070"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/calcUsageInfoTV"
+            android:text="@string/calculator_usage_info"
+            android:textSize="14sp" />
+
+</LinearLayout>

@@ -5,20 +5,20 @@
     tools:context="com.example.xdog.dartsscore.InfoFragment"
     android:padding="8dp">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:id="@+id/tableLayout">
+        android:id="@+id/tableLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:id="@+id/tableHeadingsRow">
+            android:id="@+id/tableHeadingsRow"
+            android:background="#dad3d3">
 
             <TextView
                 android:layout_width="0dp"
@@ -30,7 +30,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#308070"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -42,7 +44,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#308070"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -54,7 +58,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#308070"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -66,14 +72,17 @@
                 android:gravity="center"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#308070"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:id="@+id/playerOneRow">
+            android:id="@+id/playerOneRow"
+            android:background="#e9e3e3">
 
             <TextView
                 android:layout_width="0dp"
@@ -128,7 +137,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:id="@+id/player2Row" >
+            android:id="@+id/player2Row"
+            android:background="#e9e3e3">
 
             <TextView
                 android:layout_width="0dp"

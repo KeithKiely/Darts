@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -20,6 +21,7 @@ import android.widget.Toast;
  */
 public class Calculator2 extends AppCompatActivity implements View.OnFocusChangeListener {
     private EditText dart1ET, dart2ET, dart3ET;
+    private TextView dartsHeadingTV;
     private Button bOne, bTwo,bThree, bFour, bFive, bSix,
             bSeven, bEight, bNine, bZero;
     private boolean editText1Selected = true;
@@ -36,6 +38,9 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
             setSupportActionBar(myToolbar);
             getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         }
+        String playerName = getIntent().getExtras().getString("name");
+        dartsHeadingTV = (TextView) findViewById(R.id.dartsHeadingTV);
+        dartsHeadingTV.setText(playerName);
         ((EditText) findViewById(R.id.dart1ET)).setInputType(InputType.TYPE_NULL);
         ((EditText) findViewById(R.id.dart2ET)).setInputType(InputType.TYPE_NULL);
         ((EditText) findViewById(R.id.dart3ET)).setInputType(InputType.TYPE_NULL);
