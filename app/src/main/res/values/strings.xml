@@ -74,6 +74,7 @@
     <string name="dart_three">Dart Three</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="draw">Draw</string>
     <string name="left_swipe">Left Swipe:</string>
     <string name="right_swipe">Right Swipe:</string>
     <string name="calculator_info">Opens calculator.</string>
