@@ -23,9 +23,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.ArrayList;
 
 public class Scoreboard extends AppCompatActivity {
@@ -53,21 +50,17 @@ public class Scoreboard extends AppCompatActivity {
 
     static Bundle bundle;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        y1 = 0;
+        y2 = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         if (myToolbar != null) {
             setSupportActionBar(myToolbar);
-            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+            myToolbar.setTitle(getResources().getString(R.string.app_name));
         }
         currentRound = 1;
         p1RoundWins =0;
@@ -169,10 +162,6 @@ public class Scoreboard extends AppCompatActivity {
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
         }
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void openCalc(View view) {
@@ -194,7 +183,7 @@ public class Scoreboard extends AppCompatActivity {
     public void scoreManagement(boolean fromCalc){
         // do your stuff here
         int result;
-        if (fromCalc == true) {
+        if (fromCalc) {
             result = calcResult;
         } else {
             result = Integer.parseInt(scoreET.getText().toString().trim());
@@ -342,19 +331,8 @@ public class Scoreboard extends AppCompatActivity {
     }
 
     public void openInfo(View view) {
-        /*bundle = new Bundle();
-        bundle.putInt(P1_ROUND_WINS, p1RoundWins);
-        bundle.putInt(P2_ROUND_WINS, p2RoundWins);
-        bundle.putInt(NUM_ROUNDS, totalLegs);
-        bundle.putInt(TOTAL_PLAYERS, totalPlayers);
-        bundle.putInt(CURRENT_ROUND, currentRound);
-        bundle.putString(PLAYER_1_NAME, newPlayers.get(0).getPlayerName());
-        if (totalPlayers == 2)
-        bundle.putString(PLAYER_2_NAME, newPlayers.get(1).getPlayerName());*/
-
         FragmentManager fm = getFragmentManager();
         UsageFragment usageFragment = new UsageFragment();
-        //usageFragment.setArguments(bundle);
         usageFragment.show(fm, getResources().getString(R.string.how_to));
     }
 
