@@ -38,7 +38,7 @@ public class Scoreboard extends AppCompatActivity {
     private int gameScore, totalPlayers, numLegs,totalLegs, p1RoundWins,
             p2RoundWins, currentRound, calcResult;
     private TextView playerName, player2Name, currentScoreP1, currentScoreP2;
-    private EditText player1ScoreET;
+    private EditText scoreET;
     private boolean roundOver = false;
     private float x1, y1, x2, y2;
     private ColorStateList oldColors;
@@ -93,15 +93,26 @@ public class Scoreboard extends AppCompatActivity {
         currentScoreP1.setText(temp);
         playerName.setTextColor(Color.parseColor("#308070"));
 
-        player1ScoreET = (EditText) findViewById(R.id.player1ScoreET);
-        player1ScoreET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        scoreET = (EditText) findViewById(R.id.scoreET);
+        scoreET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (!player1ScoreET.getText().toString().equals("")) {
-                        scoreManagement(false);
-                        roundManagement();
-                        player1ScoreET.setText("");
+                    String tempScore = scoreET.getText().toString().trim();
+                    if (!tempScore.equals("")) {
+                        int tempPlayerScore = Integer.parseInt(tempScore);
+                        if (tempPlayerScore <=180 && tempPlayerScore >= 0) {
+                            scoreManagement(false);
+                            roundManagement();
+                            scoreET.setText("");
+                        } else {
+                            Context context = getApplicationContext();
+                            CharSequence message = getResources().getString(R.string.invalid_entry);
+                            //int duration = Toast.LENGTH_SHORT;
+                            final Toast toastBasic = Toast.makeText(context, message, Toast.LENGTH_LONG);
+                            toastBasic.show();
+                            scoreET.setText("");
+                        }
                     }
                 }
                 return false;
@@ -165,14 +176,18 @@ public class Scoreboard extends AppCompatActivity {
     }
 
     public void openCalc(View view) {
-        if (player1ScoreET.getText().toString().equals("")) {
+        String tempScore = scoreET.getText().toString().trim();
+        if (tempScore.equals("")) {
             Intent intent = new Intent(this, Calculator2.class);
             intent.putExtra("name", newPlayers.get(currentPlayer - 1).getPlayerName());
             intent.putExtra("currentPlayer", currentPlayer);
             startActivityForResult(intent, 1);
         } else {
-            scoreManagement(false);
-            roundManagement();
+            int tempPlayerScore = Integer.parseInt(tempScore);
+            if (tempPlayerScore <= 180 && tempPlayerScore >= 0) {
+                scoreManagement(false);
+                roundManagement();
+            }
         }
     }
 
@@ -182,7 +197,7 @@ public class Scoreboard extends AppCompatActivity {
         if (fromCalc == true) {
             result = calcResult;
         } else {
-            result = Integer.parseInt(player1ScoreET.getText().toString().trim());
+            result = Integer.parseInt(scoreET.getText().toString().trim());
         }
         if (currentPlayer == 1) {
             playerName.setTextColor(oldColors);

@@ -45,8 +45,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/scrollView"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp">
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -138,7 +138,7 @@
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/player1ScoreET"
+                android:id="@+id/scoreET"
                 android:textSize="20sp"
                 android:inputType="number"
                 android:layout_gravity="center"
