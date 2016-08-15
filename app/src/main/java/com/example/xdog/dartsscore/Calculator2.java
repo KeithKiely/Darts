@@ -15,13 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Keith on 29/07/2016.
- * Calculates 3 dart score
- */
 public class Calculator2 extends AppCompatActivity implements View.OnFocusChangeListener {
     private EditText dart1ET, dart2ET, dart3ET;
-    private TextView dartsHeadingTV;
     private Button bOne, bTwo,bThree, bFour, bFive, bSix,
             bSeven, bEight, bNine, bZero;
     private boolean editText1Selected = true;
@@ -36,17 +31,20 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         if (myToolbar != null) {
             setSupportActionBar(myToolbar);
-            getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+            myToolbar.setTitle(getResources().getString(R.string.app_name));
         }
         String playerName = getIntent().getExtras().getString("name");
-        dartsHeadingTV = (TextView) findViewById(R.id.dartsHeadingTV);
-        dartsHeadingTV.setText(playerName);
-        ((EditText) findViewById(R.id.dart1ET)).setInputType(InputType.TYPE_NULL);
-        ((EditText) findViewById(R.id.dart2ET)).setInputType(InputType.TYPE_NULL);
-        ((EditText) findViewById(R.id.dart3ET)).setInputType(InputType.TYPE_NULL);
+        TextView dartsHeadingTV = (TextView) findViewById(R.id.dartsHeadingTV);
+        if (dartsHeadingTV != null) {
+            dartsHeadingTV.setText(playerName);
+        }
+
         dart1ET = (EditText) findViewById(R.id.dart1ET);
         dart2ET = (EditText) findViewById(R.id.dart2ET);
         dart3ET = (EditText) findViewById(R.id.dart3ET);
+        dart1ET.setInputType(InputType.TYPE_NULL);
+        dart2ET.setInputType(InputType.TYPE_NULL);
+        dart3ET.setInputType(InputType.TYPE_NULL);
         dart1ET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
