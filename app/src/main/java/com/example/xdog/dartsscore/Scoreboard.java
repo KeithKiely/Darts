@@ -33,10 +33,11 @@ public class Scoreboard extends AppCompatActivity {
     private ArrayAdapter listAdapter, listAdapter2;
     private int currentPlayer = 1;
     private int gameScore, totalPlayers, numLegs,totalLegs, p1RoundWins,
-            p2RoundWins, currentRound, calcResult;
+            p2RoundWins, currentRound, calcResult,p1CurrentScore, p2CurrentScore;
     private TextView playerName, player2Name, currentScoreP1, currentScoreP2;
     private EditText scoreET;
     private boolean roundOver = false;
+    private boolean validScore = true;
     private float x1, y1, x2, y2;
     private ColorStateList oldColors;
     static final String TOTAL_PLAYERS = "totalPlayers";
@@ -136,32 +137,6 @@ public class Scoreboard extends AppCompatActivity {
             list1.setAdapter(listAdapter);
             list2.setAdapter(listAdapter2);
         }
-        if (newPlayers.size() == 3) {
-            //player one
-            p1Scores = new ArrayList<>();
-            p1Scores.add(newPlayers.get(0).getScore());
-            //player two
-            p2Scores = new ArrayList<>();
-            p2Scores.add(newPlayers.get(1).getScore());
-
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
-            listAdapter2 = new ArrayAdapter<>(this,R.layout.list_text_layout,p2Scores);
-            list1.setAdapter(listAdapter);
-            list2.setAdapter(listAdapter2);
-        }
-        if (newPlayers.size() == 4) {
-            //player one
-            p1Scores = new ArrayList<>();
-            p1Scores.add(newPlayers.get(0).getScore());
-            //player two
-            p2Scores = new ArrayList<>();
-            p2Scores.add(newPlayers.get(1).getScore());
-
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p1Scores);
-            listAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,p2Scores);
-            list1.setAdapter(listAdapter);
-            list2.setAdapter(listAdapter2);
-        }
     }
 
     public void openCalc(View view) {
@@ -189,51 +164,70 @@ public class Scoreboard extends AppCompatActivity {
             result = Integer.parseInt(scoreET.getText().toString().trim());
         }
         if (currentPlayer == 1) {
-            playerName.setTextColor(oldColors);
-            if (totalPlayers == 2) {
-                player2Name.setTextColor(Color.parseColor("#308070"));
-            } if (totalPlayers == 1){
-                playerName.setTextColor(Color.parseColor("#308070"));
+            int tempScore = p1CurrentScore;
+            p1CurrentScore += result;
+            int newScore = gameScore - p1CurrentScore;
+            if (newScore != 1) {
+                validScore = true;
+                playerName.setTextColor(oldColors);
+                if (totalPlayers == 2) {
+                    player2Name.setTextColor(Color.parseColor("#308070"));
+                }
+                if (totalPlayers == 1) {
+                    playerName.setTextColor(Color.parseColor("#308070"));
+                }
+                String temp = newScore + "";
+                p1Scores.add(result);
+                currentScoreP1.setText(temp);
+                listAdapter.notifyDataSetChanged();
+                list1.setSelection(listAdapter.getCount() - 1);
+                newPlayers.get(0).subtractScore(result);
+            } else {
+                validScore = false;
+                p1CurrentScore = tempScore;
+                Context context = getApplicationContext();
+                CharSequence message = getResources().getString(R.string.double_out);
+                //int duration = Toast.LENGTH_SHORT;
+                final Toast toastBasic = Toast.makeText(context, message, Toast.LENGTH_LONG);
+                toastBasic.show();
             }
-            p1Scores.add(result);
-            int currentScore = 0;
-            for (int i = 1; i < p1Scores.size(); i++) {
-                //Log.i("Scoreboard: ", " "+score);
-                currentScore += p1Scores.get(i);
-            }
-            currentScore = gameScore - currentScore;
-            String temp = currentScore+"";
-            currentScoreP1.setText(temp);
-            listAdapter.notifyDataSetChanged();
-            list1.setSelection(listAdapter.getCount() - 1);
-            newPlayers.get(0).subtractScore(result);
         }//End of player 1
         if (currentPlayer == 2) {
-            playerName.setTextColor(Color.parseColor("#308070"));
-            player2Name.setTextColor(oldColors);
-            p2Scores.add(result);
-            int currentScore = 0;
-            for (int i = 1; i < p2Scores.size(); i++) {
-                //Log.i("Scoreboard: ", " "+score);
-                currentScore += p2Scores.get(i);
+            int tempScore = p2CurrentScore;
+            p2CurrentScore += result;
+            int newScore = gameScore - p2CurrentScore;
+            if (newScore != 1) {
+                validScore = true;
+                playerName.setTextColor(Color.parseColor("#308070"));
+                player2Name.setTextColor(oldColors);
+                p2Scores.add(result);
+                String temp = newScore + "";
+                currentScoreP2.setText(temp);
+                listAdapter2.notifyDataSetChanged();
+                list2.setSelection(listAdapter2.getCount() - 1);
+                newPlayers.get(1).subtractScore(result);
+                String currentPlayer = " " + newPlayers.get(0).getPlayerName();
+                playerName.setText(currentPlayer);
+            } else {
+                validScore = false;
+                p2CurrentScore = tempScore;
+                Context context = getApplicationContext();
+                CharSequence message = getResources().getString(R.string.double_out);
+                //int duration = Toast.LENGTH_SHORT;
+                final Toast toastBasic = Toast.makeText(context, message, Toast.LENGTH_LONG);
+                toastBasic.show();
             }
-            currentScore = gameScore - currentScore;
-            String temp = currentScore+"";
-            currentScoreP2.setText(temp);
-            listAdapter2.notifyDataSetChanged();
-            list2.setSelection(listAdapter2.getCount() - 1);
-            newPlayers.get(1).subtractScore(result);
-            String currentPlayer = " " + newPlayers.get(0).getPlayerName();
-            playerName.setText(currentPlayer);
         }//End of player 2
     }
 
     public void roundManagement(){
+        String tempName = newPlayers.get(currentPlayer - 1 ).getPlayerName(); // Stores player name to send to GameOverDialog.class
         for (int i = 0; i < newPlayers.size(); i++) {
             ////////////////////////////////////////////
             // Round Over
             if (newPlayers.get(i).getScore() < 1) {
                 currentRound++;
+                p1CurrentScore = 0;
                 String temp = ""+gameScore;
                 currentScoreP1.setText(temp);
                 currentScoreP2.setText(temp);
@@ -250,12 +244,13 @@ public class Scoreboard extends AppCompatActivity {
                 p1Scores.clear();
                 p1Scores.add(gameScore);
                 if (newPlayers.size() == 2) {
+                    p2CurrentScore = 0;
                     p2Scores.clear();
                     p2Scores.add(gameScore);
                     listAdapter2.notifyDataSetChanged();
+                    player2Name.setTextColor(oldColors);
+                    playerName.setTextColor(Color.parseColor("#308070"));
                 }
-                player2Name.setTextColor(oldColors);
-                playerName.setTextColor(Color.parseColor("#308070"));
 
                 listAdapter.notifyDataSetChanged();
                 Context context = getApplicationContext();
@@ -271,11 +266,10 @@ public class Scoreboard extends AppCompatActivity {
                 bundle.putInt(P1_ROUND_WINS, p1RoundWins);
                 bundle.putInt(P2_ROUND_WINS, p2RoundWins);
                 bundle.putInt(NUM_ROUNDS, totalLegs);
-                Log.i("Scoreboard ", " current player" + currentPlayer);
-                if (currentPlayer == 1)
-                    bundle.putString(PLAYER_NAME, newPlayers.get(0).getPlayerName());
-                if (currentPlayer == 2)
-                    bundle.putString(PLAYER_NAME, newPlayers.get(1).getPlayerName());
+                Log.i("Scoreboard ", " Current player" + currentPlayer);
+
+                bundle.putString(PLAYER_NAME, tempName);
+
 
                 FragmentManager fm = getFragmentManager();
                 GamerOverDialog dialogFragment = new GamerOverDialog();
@@ -288,8 +282,10 @@ public class Scoreboard extends AppCompatActivity {
             roundOver = false;
         }
         if (currentPlayer == totalPlayers) {
+            if (validScore)
             currentPlayer = 1;
         } else {
+            if(validScore)
             currentPlayer++;
         }
     }

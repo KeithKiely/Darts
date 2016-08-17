@@ -1,8 +1,8 @@
 package com.example.xdog.dartsscore;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class Menu extends AppCompatActivity {
@@ -15,6 +15,11 @@ public class Menu extends AppCompatActivity {
 
     public void startGame(View view) {
         Intent intent = new Intent(this, GameSetting.class);
+        startActivity(intent);
+    }
+
+    public void openPracticeSession(View view) {
+        Intent intent = new Intent(this, PracticeSession.class);
         startActivity(intent);
     }
 }
