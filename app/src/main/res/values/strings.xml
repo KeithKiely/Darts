@@ -91,4 +91,72 @@
     <string name="single">Single</string>
     <string name="_double">Double</string>
     <string name="triple">Triple</string>
+
+    <string-array name="dartboard">
+        <item>1Single</item>
+        <item>2Single</item>
+        <item>3Single</item>
+        <item>4Single</item>
+        <item>5Single</item>
+        <item>6Single</item>
+        <item>7Single</item>
+        <item>8Single</item>
+        <item>9Single</item>
+        <item>10Single</item>
+        <item>11Single</item>
+        <item>12Single</item>
+        <item>13Single</item>
+        <item>14Single</item>
+        <item>15Single</item>
+        <item>16Single</item>
+        <item>17Single</item>
+        <item>18Single</item>
+        <item>19Single</item>
+        <item>20Single</item>
+
+        <item>1Double</item>
+        <item>2Double</item>
+        <item>3Double</item>
+        <item>4Double</item>
+        <item>5Double</item>
+        <item>6Double</item>
+        <item>7Double</item>
+        <item>8Double</item>
+        <item>9Double</item>
+        <item>10Double</item>
+        <item>11Double</item>
+        <item>12Double</item>
+        <item>13Double</item>
+        <item>14Double</item>
+        <item>15Double</item>
+        <item>16Double</item>
+        <item>17Double</item>
+        <item>18Double</item>
+        <item>19Double</item>
+        <item>20Double</item>
+
+        <item>1Triple</item>
+        <item>2Triple</item>
+        <item>3Triple</item>
+        <item>4Triple</item>
+        <item>5Triple</item>
+        <item>6Triple</item>
+        <item>7Triple</item>
+        <item>8Triple</item>
+        <item>9Triple</item>
+        <item>10Triple</item>
+        <item>11Triple</item>
+        <item>12Triple</item>
+        <item>13Triple</item>
+        <item>14Triple</item>
+        <item>15Triple</item>
+        <item>16Triple</item>
+        <item>17Triple</item>
+        <item>18Triple</item>
+        <item>19Triple</item>
+        <item>20Triple</item>
+
+        <item>25</item>
+        <item>50</item>
+    </string-array>
 </resources>

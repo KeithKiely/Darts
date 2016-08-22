@@ -102,8 +102,18 @@
             android:id="@+id/nextButton"
             android:textColor="#308070"
             android:textSize="20sp"
-            android:onClick="generateNewGoal" />
+            android:onClick="newGoal" />
 
     </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button3"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:onClick="findHighestValues" />
 
 </RelativeLayout>

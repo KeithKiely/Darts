@@ -3,20 +3,38 @@ package com.example.xdog.dartsscore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeSet;
 
 public class PracticeSession extends AppCompatActivity {
-    private EditText dartsThrownET;
     private TextView numberTypeTV, currentGoalTV;
+    private EditText dartsThrownET;
+    private ArrayList<Integer> throwsTaken;
+    private HashMap<String, Integer> attempts;
+    private int currentGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_session);
+
+        attempts = new HashMap<>();
+        throwsTaken = new ArrayList<>();
+        String [] dartboard = getResources().getStringArray(R.array.dartboard);
+        for (int i = 0; i < dartboard.length; i++) {
+            attempts.put(dartboard[i], 0);
+        }
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         if (myToolbar != null) {
@@ -27,19 +45,37 @@ public class PracticeSession extends AppCompatActivity {
         dartsThrownET = (EditText) findViewById(R.id.dartsThrownET);
         numberTypeTV = (TextView) findViewById(R.id.numberTypeTV);
         currentGoalTV = (TextView) findViewById(R.id.currentGoalTV);
+
+        generateGoal();
     }
 
-    public void generateNewGoal(View view) {
+    public void newGoal(View view) {
+        String searchKey = currentGoal + numberTypeTV.getText().toString();
+        int currentGoal = 0;
+        if (!dartsThrownET.getText().toString().equals("")) {
+            currentGoal = Integer.parseInt(dartsThrownET.getText().toString());
+        }
+        int currentAttempts = attempts.get(searchKey); //Number of darts previously used to hit number
+        int temp = currentAttempts + currentGoal;
+        attempts.put(searchKey, temp);
+        dartsThrownET.setText("");
+        generateGoal();
+    }
+
+    public String generateGoal() {
         Random r = new Random();
-        String goal = "";
+        String goal;
         int randNum = r.nextInt(21 - 1 + 1) + 1;
+        currentGoal = randNum;
         if (randNum == 21) {
             int bullOr25 = r.nextInt(2 - 1 + 1) + 1;
             if (bullOr25 == 1) {
                 bullOr25 = 25;
+                currentGoal = bullOr25;
                 goal = ""+bullOr25;
             } else {
                 bullOr25 = 50;
+                currentGoal = bullOr25;
                 goal = ""+bullOr25;
             }
             numberTypeTV.setText("");
@@ -57,5 +93,36 @@ public class PracticeSession extends AppCompatActivity {
         if(secondRandNum == 3  && randNum != 21){
             numberTypeTV.setText(getResources().getString(R.string.triple));
         }
+        return goal+numberTypeTV.getText().toString().trim();
+    }
+
+    public void findHighestValues(View view) {
+        TreeSet<Integer> tempMap = (TreeSet<Integer>) new TreeSet<>(attempts.values()).descendingSet();
+        int index = 0;
+        for (Integer temp: tempMap) {
+            index++;
+
+            for (Map.Entry<String, Integer> map: attempts.entrySet()) {
+                if (map.getValue() == temp.intValue()) {
+                    Log.i("PracticeSession: ", " Key: " + map.getKey());
+                    Log.i("PracticeSession: ", " Value: " + map.getValue());
+                }
+            }
+            if (index == 3) {
+                break;
+            }
+        }
+    }
+
+    public HashMap<String, Integer> buildTempMap (HashMap <String, Integer> tempMap) {
+        int maxValueInMap = (Collections.max(attempts.values()));  // This will return max value in the Hashmap
+        for (Iterator<Map.Entry<String, Integer>> it = attempts.entrySet().iterator(); it.hasNext();) {  // Itrate through hashmap
+            Map.Entry<String, Integer> entry = it.next();
+            if (entry.getValue() == maxValueInMap) {
+                tempMap.put(entry.getKey(), entry.getValue());
+                it.remove();
+            }
+        }
+        return tempMap;
     }
 }
