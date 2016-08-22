@@ -91,6 +91,9 @@
     <string name="single">Single</string>
     <string name="_double">Double</string>
     <string name="triple">Triple</string>
+    <string name="type">Type</string>
+    <string name="number">Number</string>
+    <string name="no_of_throws">No. of Throws</string>
 
     <string-array name="dartboard">
         <item>1Single</item>
