@@ -94,6 +94,7 @@
     <string name="type">Type</string>
     <string name="number">Number</string>
     <string name="no_of_throws">No. of Throws</string>
+    <string name="attempts">Attempts</string>
 
     <string-array name="dartboard">
         <item>1Single</item>

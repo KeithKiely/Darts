@@ -1,18 +1,15 @@
 package com.example.xdog.dartsscore;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeSet;
@@ -20,7 +17,6 @@ import java.util.TreeSet;
 public class PracticeSession extends AppCompatActivity {
     private TextView numberTypeTV, currentGoalTV;
     private EditText dartsThrownET;
-    private ArrayList<Integer> throwsTaken;
     private HashMap<String, Integer> attempts;
     private int currentGoal;
 
@@ -30,10 +26,9 @@ public class PracticeSession extends AppCompatActivity {
         setContentView(R.layout.activity_practice_session);
 
         attempts = new HashMap<>();
-        throwsTaken = new ArrayList<>();
         String [] dartboard = getResources().getStringArray(R.array.dartboard);
-        for (int i = 0; i < dartboard.length; i++) {
-            attempts.put(dartboard[i], 0);
+        for (String aDartboard : dartboard) {
+            attempts.put(aDartboard, 0);
         }
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -114,15 +109,9 @@ public class PracticeSession extends AppCompatActivity {
         }
     }
 
-    public HashMap<String, Integer> buildTempMap (HashMap <String, Integer> tempMap) {
-        int maxValueInMap = (Collections.max(attempts.values()));  // This will return max value in the Hashmap
-        for (Iterator<Map.Entry<String, Integer>> it = attempts.entrySet().iterator(); it.hasNext();) {  // Itrate through hashmap
-            Map.Entry<String, Integer> entry = it.next();
-            if (entry.getValue() == maxValueInMap) {
-                tempMap.put(entry.getKey(), entry.getValue());
-                it.remove();
-            }
-        }
-        return tempMap;
+    public void openStats(View view) {
+        FragmentManager fm = getFragmentManager();
+        ShotsMissedDialog shotsMissedDialog = new ShotsMissedDialog();
+        shotsMissedDialog.show(fm, getResources().getString(R.string.how_to));
     }
 }
