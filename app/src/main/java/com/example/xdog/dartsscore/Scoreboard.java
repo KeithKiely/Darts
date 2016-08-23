@@ -24,7 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * Scoreboard: Holds plyers current score
+ */
 public class Scoreboard extends AppCompatActivity {
     private ArrayList<Integer> p1Scores;
     private ArrayList<Integer> p2Scores;

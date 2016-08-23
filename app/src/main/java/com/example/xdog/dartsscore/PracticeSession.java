@@ -18,7 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeSet;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * PracticeSession: Practice game that tasks the player to hit certain numbers and keeps a record of throws
+ */
 public class PracticeSession extends AppCompatActivity {
     private TextView numberTypeTV, currentGoalTV;
     private EditText dartsThrownET;

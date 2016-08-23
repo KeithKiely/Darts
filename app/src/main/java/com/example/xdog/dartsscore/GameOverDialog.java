@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * DialogFragment: Displays information related to the winning player
+ */
 public class GameOverDialog extends DialogFragment {
     private int p1RoundWins, p2RoundWins;
     private String roundWins;

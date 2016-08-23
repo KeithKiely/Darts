@@ -14,7 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * Calculator2 class: Custom built calculator. Designed for ease of use whilst playing darts
+ */
 public class Calculator2 extends AppCompatActivity implements View.OnFocusChangeListener {
     private EditText dart1ET, dart2ET, dart3ET;
     private Button bOne, bTwo,bThree, bFour, bFive, bSix,

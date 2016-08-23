@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * DialogFragment: Displays round and player information
+ */
 public class InfoFragment extends DialogFragment {
     private String p1Name, p2Name, maxRounds;
     private int totalPlayers, p1RoundWins, p2RoundWins,currentRound;

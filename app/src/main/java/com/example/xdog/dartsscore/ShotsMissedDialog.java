@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * Created by Keith Kiely on 22/08/2016.
- * Fragment Dialog: Displays the 4 highest number of missed throws
+ * Fragment Dialog: Displays the 4 highest of missed throws
  */
 public class ShotsMissedDialog extends DialogFragment {
     private ArrayList <HashMap> list;

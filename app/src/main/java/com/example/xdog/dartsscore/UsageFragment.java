@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * DialogFragment: Displays user information related to current game type
+ */
 public class UsageFragment  extends DialogFragment {
 
     public UsageFragment() {

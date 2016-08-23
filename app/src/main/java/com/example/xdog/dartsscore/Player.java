@@ -2,7 +2,10 @@ package com.example.xdog.dartsscore;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * Player: Information related player
+ */
 public class Player implements Parcelable{
     private String playerName;
     private int score;

@@ -17,7 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
+/**
+ * Created by Keith Kiely on 22/08/2016.
+ * GameSetting class: Initial setup for darts game
+ */
 public class GameSetting extends AppCompatActivity implements OnSeekBarChangeListener{
     private RadioGroup matchScoreGr;
     private EditText name1, name2, name3, name4;
