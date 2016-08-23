@@ -86,7 +86,7 @@
     <string name="practice">Practice</string>
     <string name="press_here">Press here</string>
     <string name="shots_taken">Shots Taken</string>
-    <string name="current_goal">Current Goal</string>
+    <string name="current_goal">Current Target</string>
     <string name="_10">10</string>
     <string name="single">Single</string>
     <string name="_double">Double</string>
@@ -95,72 +95,78 @@
     <string name="number">Number</string>
     <string name="no_of_throws">No. of Throws</string>
     <string name="attempts">Attempts</string>
+    <string name="throws_missed">Number of Misses</string>
+    <string name="finished">Finished</string>
+    <string name="misses">Misses</string>
+    <string name="current_goal_practice_info">Current target displays a number on the board, which the player needs to hit this in a few shots as possible.</string>
+    <string name="number_of_throws_info">Player must enter the number of throws it takes them to hit the current goal.</string>
+    <string name="finish_info">Upon pressing back, a dialog is displayed. This dialog highlights the players weakest numbers during their practice session.</string>
 
     <string-array name="dartboard">
-        <item>1Single</item>
-        <item>2Single</item>
-        <item>3Single</item>
-        <item>4Single</item>
-        <item>5Single</item>
-        <item>6Single</item>
-        <item>7Single</item>
-        <item>8Single</item>
-        <item>9Single</item>
-        <item>10Single</item>
-        <item>11Single</item>
-        <item>12Single</item>
-        <item>13Single</item>
-        <item>14Single</item>
-        <item>15Single</item>
-        <item>16Single</item>
-        <item>17Single</item>
-        <item>18Single</item>
-        <item>19Single</item>
-        <item>20Single</item>
+        <item>1 Single</item>
+        <item>2 Single</item>
+        <item>3 Single</item>
+        <item>4 Single</item>
+        <item>5 Single</item>
+        <item>6 Single</item>
+        <item>7 Single</item>
+        <item>8 Single</item>
+        <item>9 Single</item>
+        <item>10 Single</item>
+        <item>11 Single</item>
+        <item>12 Single</item>
+        <item>13 Single</item>
+        <item>14 Single</item>
+        <item>15 Single</item>
+        <item>16 Single</item>
+        <item>17 Single</item>
+        <item>18 Single</item>
+        <item>19 Single</item>
+        <item>20 Single</item>
 
-        <item>1Double</item>
-        <item>2Double</item>
-        <item>3Double</item>
-        <item>4Double</item>
-        <item>5Double</item>
-        <item>6Double</item>
-        <item>7Double</item>
-        <item>8Double</item>
-        <item>9Double</item>
-        <item>10Double</item>
-        <item>11Double</item>
-        <item>12Double</item>
-        <item>13Double</item>
-        <item>14Double</item>
-        <item>15Double</item>
-        <item>16Double</item>
-        <item>17Double</item>
-        <item>18Double</item>
-        <item>19Double</item>
-        <item>20Double</item>
+        <item>1 Double</item>
+        <item>2 Double</item>
+        <item>3 Double</item>
+        <item>4 Double</item>
+        <item>5 Double</item>
+        <item>6 Double</item>
+        <item>7 Double</item>
+        <item>8 Double</item>
+        <item>9 Double</item>
+        <item>10 Double</item>
+        <item>11 Double</item>
+        <item>12 Double</item>
+        <item>13 Double</item>
+        <item>14 Double</item>
+        <item>15 Double</item>
+        <item>16 Double</item>
+        <item>17 Double</item>
+        <item>18 Double</item>
+        <item>19 Double</item>
+        <item>20 Double</item>
 
-        <item>1Triple</item>
-        <item>2Triple</item>
-        <item>3Triple</item>
-        <item>4Triple</item>
-        <item>5Triple</item>
-        <item>6Triple</item>
-        <item>7Triple</item>
-        <item>8Triple</item>
-        <item>9Triple</item>
-        <item>10Triple</item>
-        <item>11Triple</item>
-        <item>12Triple</item>
-        <item>13Triple</item>
-        <item>14Triple</item>
-        <item>15Triple</item>
-        <item>16Triple</item>
-        <item>17Triple</item>
-        <item>18Triple</item>
-        <item>19Triple</item>
-        <item>20Triple</item>
+        <item>1 Triple</item>
+        <item>2 Triple</item>
+        <item>3 Triple</item>
+        <item>4 Triple</item>
+        <item>5 Triple</item>
+        <item>6 Triple</item>
+        <item>7 Triple</item>
+        <item>8 Triple</item>
+        <item>9 Triple</item>
+        <item>10 Triple</item>
+        <item>11 Triple</item>
+        <item>12 Triple</item>
+        <item>13 Triple</item>
+        <item>14 Triple</item>
+        <item>15 Triple</item>
+        <item>16 Triple</item>
+        <item>17 Triple</item>
+        <item>18 Triple</item>
+        <item>19 Triple</item>
+        <item>20 Triple</item>
 
-        <item>25</item>
-        <item>50</item>
+        <item>25 Single</item>
+        <item>50 Single</item>
     </string-array>
 </resources>

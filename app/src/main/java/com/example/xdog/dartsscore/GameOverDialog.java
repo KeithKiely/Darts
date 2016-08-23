@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GamerOverDialog extends DialogFragment {
+public class GameOverDialog extends DialogFragment {
     private int p1RoundWins, p2RoundWins;
     private String roundWins;
     private String numLegs;

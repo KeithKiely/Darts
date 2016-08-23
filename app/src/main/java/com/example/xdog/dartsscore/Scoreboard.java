@@ -272,7 +272,7 @@ public class Scoreboard extends AppCompatActivity {
 
 
                 FragmentManager fm = getFragmentManager();
-                GamerOverDialog dialogFragment = new GamerOverDialog();
+                GameOverDialog dialogFragment = new GameOverDialog();
                 dialogFragment.setArguments(bundle);
                 dialogFragment.show(fm, "Game Over");
             }

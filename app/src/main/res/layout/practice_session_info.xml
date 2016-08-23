@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_usage"
+        android:id="@+id/textView14"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:layout_marginBottom="10dp"
+        android:textColor="#308070"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/current_goal"
+        android:id="@+id/textView15"
+        android:textSize="18sp"
+        android:layout_marginTop="6dp"
+        android:textColor="#308070"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/current_goal_practice_info"
+        android:id="@+id/textView16"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/throws_missed"
+        android:id="@+id/textView17"
+        android:textSize="18sp"
+        android:layout_marginTop="6dp"
+        android:textColor="#308070"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/number_of_throws_info"
+        android:id="@+id/textView18"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/finished"
+        android:id="@+id/textView19"
+        android:textSize="18sp"
+        android:layout_marginTop="6dp"
+        android:textColor="#308070"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/finish_info"
+        android:id="@+id/textView20"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+</LinearLayout>

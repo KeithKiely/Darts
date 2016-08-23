@@ -10,7 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/type"
-        android:layout_weight="1">
+        android:layout_weight="0.33"
+        android:layout_marginLeft="16dp">
     </TextView>
 
     <TextView
@@ -18,7 +19,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/number"
-        android:layout_weight="2">
+        android:layout_weight="0.33"
+        android:layout_marginLeft="20dp">
     </TextView>
 
     <TextView
@@ -26,6 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/no_of_throws"
-        android:layout_weight="1">
+        android:layout_weight="0.33"
+        android:layout_marginLeft="56dp">
     </TextView>
 </LinearLayout>

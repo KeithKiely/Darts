@@ -12,8 +12,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/type"
-            android:id="@+id/textView10"
+            android:text="@string/number"
+            android:id="@+id/textView11"
             android:layout_weight="0.33"
             android:textColor="#308070"
             android:textSize="18sp"
@@ -22,8 +22,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/number"
-            android:id="@+id/textView11"
+            android:text="@string/type"
+            android:id="@+id/textView10"
             android:layout_weight="0.33"
             android:textColor="#308070"
             android:textSize="18sp"
@@ -51,5 +51,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/threeColumnListview" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finished"
+        android:id="@+id/finishedButton"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#308070"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
