@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="40dp"
     tools:context="com.example.xdog.dartsscore.Menu"
     android:id="@+id/menuLayout"
-    android:background="@drawable/dartboard">
+    android:background="@drawable/background">
 
     <Button
-        android:layout_width="130dp"
-        android:layout_height="80dp"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
         android:text="@string/practice"
         android:id="@+id/button"
         android:layout_marginBottom="50dp"
@@ -25,11 +25,12 @@
         android:layout_alignParentStart="true"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:onClick="openPracticeSession" />
+        android:onClick="openPracticeSession"
+        android:background="@drawable/rounded_corner" />
 
     <Button
-        android:layout_width="130dp"
-        android:layout_height="80dp"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
         android:text="@string/game"
         android:id="@+id/button2"
         android:layout_alignBottom="@+id/button"
@@ -40,5 +41,6 @@
         android:textStyle="bold"
         android:onClick="startGame"
         android:paddingTop="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:background="@drawable/rounded_corner" />
 </RelativeLayout>
