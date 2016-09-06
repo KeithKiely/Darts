@@ -21,6 +21,7 @@ public class TournamentActivity extends AppCompatActivity implements TournamentS
     private Pair pair;
     private int numLegs, gameScore;
     private boolean pToNextRound = false;
+    private boolean roundOver = false;
     private boolean tournamentStarted = false;
     private Player tempPlayerHolder;
 
@@ -67,12 +68,10 @@ public class TournamentActivity extends AppCompatActivity implements TournamentS
             intent.putExtra(Constant.NUMBER_OF_LEGS, numLegs);
             intent.putExtra(Constant.IS_TOURNAMENT, true);
             startActivityForResult(intent, 1);
-        }
-        if (winners.size() > 1) {
-            players = new ArrayList<>(winners);
-            winners.clear();
-            Log.i("TourActivity: ", " In winner if");
-            roundManagement(players);
+            Log.i("TourActivity: ", " current index: " + i + " people Size: " + (people.size() -1));
+            if (i == (people.size() / 2)) {
+                roundOver = true;
+            }
         }
     }
 
@@ -144,13 +143,19 @@ public class TournamentActivity extends AppCompatActivity implements TournamentS
         if (requestCode == 1 ) {
             if (resultCode == RESULT_OK) {
                 String winnersName = data.getStringExtra(Constant.PLAYER_NAME);
-
                 for (Player temp: players) {
                     if (temp.getPlayerName().equals(winnersName)) {
                         winners.add(temp);
                     }
                 }
-                Log.i("TourActivity: ", " players size onActivity " + winners.size());
+                Log.i("TourActivity:", " winner size " +winners.size() + " roundOver: " + roundOver);
+                if (winners.size() > 1 && roundOver) {
+                    roundOver = false;
+                    players = new ArrayList<>(winners);
+                    Log.i("TourActivity: ", " plaeys size" + players.size());
+                    winners.clear();
+                    roundManagement(players);
+                }
             }
         }
     }
