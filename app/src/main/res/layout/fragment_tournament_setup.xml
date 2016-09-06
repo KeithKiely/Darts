@@ -1,0 +1,61 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.xdog.dartsscore.TournamentSetupFragment"
+    android:id="@+id/tournamentSetupFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tournament_setup"
+                android:id="@+id/title"
+                android:layout_marginBottom="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                android:layout_marginTop="16dp"
+                android:textColor="#308070" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_participants"
+                android:id="@+id/textView21"
+                android:textSize="20sp"
+                android:layout_weight="0.7"
+                android:layout_marginLeft="16dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/numPlayersET"
+                android:layout_gravity="left|top"
+                android:layout_weight="0.3"
+                android:layout_marginRight="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

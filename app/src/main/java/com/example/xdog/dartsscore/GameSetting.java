@@ -33,8 +33,6 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
 
     private ArrayList<Player> players;
 
-    public static final String NUMBER_OF_LEGS = "numLegs";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,8 +132,8 @@ public class GameSetting extends AppCompatActivity implements OnSeekBarChangeLis
             toastBasic.show();
         } else {
             Intent intent = new Intent(this, Scoreboard.class);
-            intent.putParcelableArrayListExtra("Players", players);
-            intent.putExtra(NUMBER_OF_LEGS, legs);
+            intent.putParcelableArrayListExtra(Constant.PLAYERS, players);
+            intent.putExtra(Constant.NUMBER_OF_LEGS, legs);
             startActivity(intent);
         }
     }

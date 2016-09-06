@@ -24,16 +24,16 @@ public class InfoFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            totalPlayers = getArguments().getInt(Scoreboard.TOTAL_PLAYERS);
-            p1Name = " " + getArguments().getString(Scoreboard.PLAYER_1_NAME);
+            totalPlayers = getArguments().getInt(Constant.TOTAL_PLAYERS);
+            p1Name = " " + getArguments().getString(Constant.PLAYER_1_NAME);
             if (totalPlayers == 2)
-            p2Name = " " + getArguments().getString(Scoreboard.PLAYER_2_NAME);
+            p2Name = " " + getArguments().getString(Constant.PLAYER_2_NAME);
             Log.i("InfoFragment: ", "player one name (" + p1Name + ") player 2 (" + p2Name + ")");
-            p1RoundWins = getArguments().getInt(Scoreboard.P1_ROUND_WINS);
-            maxRounds = " " + getArguments().getInt(Scoreboard.NUM_ROUNDS);
-            p2Name = " " + getArguments().getString(Scoreboard.PLAYER_2_NAME);
-            p2RoundWins = getArguments().getInt(Scoreboard.P2_ROUND_WINS);
-            currentRound = getArguments().getInt(Scoreboard.CURRENT_ROUND);
+            p1RoundWins = getArguments().getInt(Constant.P1_ROUND_WINS);
+            maxRounds = " " + getArguments().getInt(Constant.NUM_ROUNDS);
+            p2Name = " " + getArguments().getString(Constant.PLAYER_2_NAME);
+            p2RoundWins = getArguments().getInt(Constant.P2_ROUND_WINS);
+            currentRound = getArguments().getInt(Constant.CURRENT_ROUND);
         }
     }
 
@@ -67,7 +67,6 @@ public class InfoFragment extends DialogFragment {
             p2WinsTV.setText(tempP2Wins);
             player2LostTV.setText(p1wins);
         }
-
         // Inflate the layout for this fragment
         getDialog().setTitle(getResources().getString(R.string.current_score));
         return rootView;

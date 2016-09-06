@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Keith Kiely on 22/08/2016.
  * Scoreboard: Holds plyers current score
@@ -41,26 +43,18 @@ public class Scoreboard extends AppCompatActivity {
     private EditText scoreET;
     private boolean roundOver = false;
     private boolean validScore = true;
+    private boolean isTournament = false;
     private float x1, y1, x2, y2;
     private ColorStateList oldColors;
-    static final String TOTAL_PLAYERS = "totalPlayers";
-    static final String P1_ROUND_WINS = "user1RWins";
-    static final String P2_ROUND_WINS = "user2RWins";
-    static final String NUM_ROUNDS = "numberOfRounds";
-    static final String PLAYER_NAME = "winnersName";
-    static final String PLAYER_1_NAME = "player1Name";
-    static final String PLAYER_2_NAME = "player2Name";
-    static final String CURRENT_ROUND = "currentRound";
-
+    private String winner;
     static Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        y1 = 0;
-        y2 = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
-
+        y1 = 0;
+        y2 = 0;
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         if (myToolbar != null) {
             setSupportActionBar(myToolbar);
@@ -69,10 +63,14 @@ public class Scoreboard extends AppCompatActivity {
         currentRound = 1;
         p1RoundWins =0;
         p2RoundWins =0;
-
-        newPlayers = getIntent().getParcelableArrayListExtra("Players");
-        totalLegs= getIntent().getIntExtra(GameSetting.NUMBER_OF_LEGS,1);
-        numLegs = getIntent().getIntExtra(GameSetting.NUMBER_OF_LEGS,1);
+        isTournament = getIntent().getExtras().getBoolean(Constant.IS_TOURNAMENT, false);
+        if (getIntent().getParcelableArrayListExtra(Constant.PLAYERS) != null) {
+            newPlayers = getIntent().getParcelableArrayListExtra(Constant.PLAYERS);
+        }
+        if (getIntent().getParcelableArrayListExtra(Constant.PLAYERS) != null)
+            newPlayers = getIntent().getParcelableArrayListExtra(Constant.PLAYERS);
+        totalLegs= getIntent().getIntExtra(Constant.NUMBER_OF_LEGS,1);
+        numLegs = getIntent().getIntExtra(Constant.NUMBER_OF_LEGS,1);
         totalPlayers = newPlayers.size();
         gameScore = newPlayers.get(0).getScore();
         list1 = (ListView) findViewById(R.id.listView1);
@@ -266,13 +264,19 @@ public class Scoreboard extends AppCompatActivity {
             // If game over
             if (numLegs <= 0) {
                 bundle = new Bundle();
-                bundle.putInt(P1_ROUND_WINS, p1RoundWins);
-                bundle.putInt(P2_ROUND_WINS, p2RoundWins);
-                bundle.putInt(NUM_ROUNDS, totalLegs);
-                Log.i("Scoreboard ", " Current player" + currentPlayer);
+                bundle.putInt(Constant.P1_ROUND_WINS, p1RoundWins);
+                bundle.putInt(Constant.P2_ROUND_WINS, p2RoundWins);
+                bundle.putInt(Constant.NUM_ROUNDS, totalLegs);
+                bundle.putString(Constant.PLAYER_NAME, tempName);
 
-                bundle.putString(PLAYER_NAME, tempName);
+                Intent intent = new Intent();
+                if (isTournament) {
+                    intent.putExtra(Constant.PLAYER_NAME, tempName);
+                    setResult(Activity.RESULT_OK, intent);
 
+                } else  {
+                    setResult(RESULT_CANCELED);
+                }
 
                 FragmentManager fm = getFragmentManager();
                 GameOverDialog dialogFragment = new GameOverDialog();
@@ -300,7 +304,6 @@ public class Scoreboard extends AppCompatActivity {
             boolean calcCancelled = false;
             if (resultCode == Activity.RESULT_OK) {
                 calcResult = data.getIntExtra("score", 0);
-
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 calcCancelled = true;
@@ -361,14 +364,14 @@ public class Scoreboard extends AppCompatActivity {
                 // if right to left sweep event on screen
                 if (x1 > x2) {
                     bundle = new Bundle();
-                    bundle.putInt(P1_ROUND_WINS, p1RoundWins);
-                    bundle.putInt(P2_ROUND_WINS, p2RoundWins);
-                    bundle.putInt(NUM_ROUNDS, totalLegs);
-                    bundle.putInt(TOTAL_PLAYERS, totalPlayers);
-                    bundle.putInt(CURRENT_ROUND, currentRound);
-                    bundle.putString(PLAYER_1_NAME, newPlayers.get(0).getPlayerName());
+                    bundle.putInt(Constant.P1_ROUND_WINS, p1RoundWins);
+                    bundle.putInt(Constant.P2_ROUND_WINS, p2RoundWins);
+                    bundle.putInt(Constant.NUM_ROUNDS, totalLegs);
+                    bundle.putInt(Constant.TOTAL_PLAYERS, totalPlayers);
+                    bundle.putInt(Constant.CURRENT_ROUND, currentRound);
+                    bundle.putString(Constant.PLAYER_1_NAME, newPlayers.get(0).getPlayerName());
                     if (totalPlayers == 2)
-                        bundle.putString(PLAYER_2_NAME, newPlayers.get(1).getPlayerName());
+                        bundle.putString(Constant.PLAYER_2_NAME, newPlayers.get(1).getPlayerName());
 
                     FragmentManager fm = getFragmentManager();
                     InfoFragment infoFragment = new InfoFragment ();

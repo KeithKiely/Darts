@@ -1,7 +1,10 @@
 package com.example.xdog.dartsscore;
 
 import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +19,16 @@ public class GameOverDialog extends DialogFragment {
     private String roundWins;
     private String numLegs;
     private String roundLose;
+    private String winnersName;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        p1RoundWins = Scoreboard.bundle.getInt(Scoreboard.P1_ROUND_WINS);
-        p2RoundWins = Scoreboard.bundle.getInt(Scoreboard.P2_ROUND_WINS);
+        p1RoundWins = Scoreboard.bundle.getInt(Constant.P1_ROUND_WINS);
+        p2RoundWins = Scoreboard.bundle.getInt(Constant.P2_ROUND_WINS);
         roundWins = ""+ p1RoundWins;
         roundLose = ""+ p2RoundWins;
-        numLegs = ""+ Scoreboard.bundle.getInt(Scoreboard.NUM_ROUNDS);
+        numLegs = ""+ Scoreboard.bundle.getInt(Constant.NUM_ROUNDS);
     }
 
     @Override
@@ -34,30 +38,27 @@ public class GameOverDialog extends DialogFragment {
         TextView rLose = (TextView) rootView.findViewById(R.id.numLoseTV);
         TextView rounds = (TextView) rootView.findViewById(R.id.numRoundsTV);
         TextView name = (TextView) rootView.findViewById(R.id.playerNameHeadingTV);
-        Button doneB = (Button) rootView.findViewById(R.id.doneButton);
-        doneB.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
         getDialog().setTitle(getResources().getString(R.string.game_over));
-
-        String winnersName;
         if (p1RoundWins != p2RoundWins)
-            winnersName = "" + getArguments().getString(Scoreboard.PLAYER_NAME);
+            winnersName = "" + getArguments().getString(Constant.PLAYER_NAME);
         else {
             winnersName = getResources().getString(R.string.draw);
             TextView wins = (TextView) rootView.findViewById(R.id.winTV);
             wins.setVisibility(View.INVISIBLE);
         }
+        Button doneB = (Button) rootView.findViewById(R.id.doneButton);
+        doneB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
         rWins.setText(roundWins);
         rLose.setText(roundLose);
         rounds.setText(numLegs);
         name.setText(winnersName);
-
+        setCancelable(false);
         return rootView;
     }
 }

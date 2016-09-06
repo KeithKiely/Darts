@@ -1,0 +1,114 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.xdog.dartsscore.GameSetUpFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topLayout"
+        android:gravity="right">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/game"
+            android:id="@+id/textView4"
+            android:gravity="center_vertical|center|center_horizontal"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            android:textColor="#308070" />
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/gameScore3rd">
+
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gameType">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_501"
+                    android:id="@+id/radioB501"
+                    android:checked="true"
+                    android:layout_weight="0.3"
+                    android:gravity="center" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_301"
+                    android:id="@+id/radioB301"
+                    android:checked="false"
+                    android:layout_weight="0.3"
+                    android:gravity="center" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_101"
+                    android:id="@+id/radioB101"
+                    android:checked="false"
+                    android:layout_weight="0.4"
+                    android:gravity="center" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_of_legs"
+                    android:id="@+id/textView"
+                    android:textSize="20sp"
+                    android:gravity="center|center_horizontal" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <SeekBar
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar"
+                        android:max="17"
+                        android:indeterminate="false"
+                        android:layout_weight=".7" />
+
+                    <TextView
+                        android:layout_width="21dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_0"
+                        android:id="@+id/legsTV"
+                        android:textSize="20sp"
+                        android:layout_weight="0.1" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </RadioGroup>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:id="@+id/startBT"
+            android:textColor="#308070"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

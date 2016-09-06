@@ -20,10 +20,10 @@
     <string name="_501">501</string>
     <string name="_301">301</string>
     <string name="_101">101</string>
-    <string name="number_of_sets">Number of Sets</string>
-    <string name="number_of_legs">Number of Legs</string>
+    <string name="number_of_sets">No. of Sets</string>
+    <string name="number_of_legs">No. of Legs</string>
     <string name="game">Game</string>
-    <string name="number_of_players">Number of Players</string>
+    <string name="number_of_players">No. of Players</string>
     <string name="players">Players</string>
     <string name="names">Names</string>
     <string name="player_1">Player 1</string>
@@ -95,12 +95,16 @@
     <string name="number">Number</string>
     <string name="no_of_throws">No. of Throws</string>
     <string name="attempts">Attempts</string>
-    <string name="throws_missed">Number of Misses</string>
+    <string name="throws_missed">No. of Misses</string>
     <string name="finished">Finished</string>
     <string name="misses">Misses</string>
     <string name="current_goal_practice_info">Current target displays a number on the board, which the player needs to hit this in a few shots as possible.</string>
     <string name="number_of_throws_info">Player must enter the number of throws it takes them to hit the current goal.</string>
     <string name="finish_info">Upon pressing back, a dialog is displayed. This dialog highlights the players weakest numbers during their practice session.</string>
+    <string name="number_of_participants">No. of Participants:</string>
+    <string name="username">Username:</string>
+    <string name="name">Name</string>
+    <string name="tournament_setup">Tournament Setup</string>
 
     <string-array name="dartboard">
         <item>1 Single</item>

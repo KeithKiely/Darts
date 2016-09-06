@@ -50,6 +50,14 @@ public class Player implements Parcelable{
         this.score -= score;
     }
 
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    public void setPlayerNum(int playerNum) {
+        this.playerNum = playerNum;
+    }
+
     @Override
     public int describeContents() {
         return 0;

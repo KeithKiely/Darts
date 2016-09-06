@@ -300,7 +300,6 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
             dart3Num = d1Mem;
         }
     }
-
     public void mult2(View view){
         if (!dart1ET.getText().toString().equals("")) {
             d1Mem = Integer.parseInt(dart1ET.getText().toString().trim());
@@ -333,7 +332,6 @@ public class Calculator2 extends AppCompatActivity implements View.OnFocusChange
             dart3Num = dart3;
         }
     }
-
     public void mult3(View view){
         if (!dart1ET.getText().toString().equals("")) {
             d1Mem = Integer.parseInt(dart1ET.getText().toString().trim());
